@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+public class GameManager : MonoBehaviour
+{
+	public GameManager instance = null;
 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	void Awake()
+	{
+		if (instance == null)
+			instance = this;
+		else if (instance = this)
+			DestroyObject(this);
 	}
 }
