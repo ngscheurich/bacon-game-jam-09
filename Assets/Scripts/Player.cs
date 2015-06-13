@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
 
 		DontDestroyOnLoad(transform.gameObject);
 
+		Bounds bounds = GetComponent<SpriteRenderer>().sprite.bounds;
 
 	}
 

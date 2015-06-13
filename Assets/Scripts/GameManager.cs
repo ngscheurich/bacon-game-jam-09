@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 	public Text timeText;
 	public Text depthText;
 	public Text moraleText;
-	public GameObject wallPrefab;
+	public GameObject rockPrefab;
 	public Artifact baseArtifact;
 
 	private string dataPath = "Assets/Data";
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
 	private enum Phases { Mining, Exploring }
 	private Phases phase = Phases.Mining;
+	private Vector2 levelSize = new Vector2(100f, 100f);
 
 	void Awake()
 	{
@@ -74,12 +75,16 @@ public class GameManager : MonoBehaviour
 
 	void GenerateGrid()
 	{
-
+		for (int y = 0; y < levelSize.y; y++) {
+			for (int x = 0; x < levelSize.x; x++) {
+				InstantiateObject(rockPrefab, new Vector2(x, y));
+			}
+		}
 	}
 
 	void GenerateLevel()
 	{
-		SpriteRenderer renderer = wallPrefab.GetComponent<SpriteRenderer>();
+		SpriteRenderer renderer = rockPrefab.GetComponent<SpriteRenderer>();
 		Vector2 spriteSize = new Vector2(renderer.bounds.extents.x * 2, renderer.bounds.extents.y * 2);
 		string text = "";
 		try {
@@ -94,7 +99,7 @@ public class GameManager : MonoBehaviour
 
 				if (character == "#") {
 					Vector2 spritePosition = new Vector2(currentPosition.x * spriteSize.x, currentPosition.y * spriteSize.y);
-					InstantiateObject(wallPrefab, spritePosition);
+					InstantiateObject(rockPrefab, spritePosition);
 				} else if (character == "\n" || character == "\r" || character == "\r\n") {
 					nextX = 0;
 					nextY = currentPosition.y - 1;
