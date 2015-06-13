@@ -26,17 +26,25 @@ public class Miner : MonoBehaviour
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Space)) {
-			RemoveRock();
+			BreakRock();
 		}
 	}
 
-	void RemoveRock()
+	void BreakRock()
 	{
 		Vector2 key = transform.position;
 		if (gridManager.grid.ContainsKey(key)) {
 			List<GameObject> objects = gridManager.grid[key];
 			foreach (GameObject obj in objects) {
 				if (obj.tag == "Rock") Destroy(obj);
+				for (int i = 0; i < 10; i++) {
+					GameObject pebble = Instantiate(gridManager.pebblePrefab, key, Quaternion.identity) as GameObject;
+					Vector2 pebblePosition = transform.position;
+					pebblePosition.x = pebblePosition.x + Random.Range(0.1f, 1f);
+					pebblePosition.y = pebblePosition.y - Random.Range(0.1f, 1f);
+					pebble.transform.position = pebblePosition;
+					pebble.GetComponent<Rigidbody2D>().AddForce(new Vector2(10f, 0));
+        		}
 			}
 		}
 	}
