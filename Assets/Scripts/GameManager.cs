@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
 	void Update()
 	{
 		if (initializing) return;
-		string depthString = string.Format("Depth: {0}", depth.ToString());
+		string depthString = string.Format("Depth: {0}00 ft", depth.ToString());
 		depthText.text = depthString;
 		string moraleString = string.Format("Morale: {0}", morale.ToString());
 		moraleText.text = moraleString;
