@@ -24,16 +24,17 @@ public class GameManager : MonoBehaviour
 	public Text moraleText;
 	public GameObject rockPrefab;
 	public Artifact baseArtifact;
+  	public Vector2 levelSize = new Vector2(100f, 100f);
 
 	private string dataPath = "Assets/Data";
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
 	private DateTime currentDateTime;
 	private List<Artifact> artifacts = new List<Artifact>();
-	private bool initializing;
+	private List<Vector2> gridPositions = new List<Vector2>();
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
 	private enum Phases { Mining, Exploring }
 	private Phases phase = Phases.Mining;
-	private Vector2 levelSize = new Vector2(100f, 100f);
+	private bool initializing;
 
 	void Awake()
 	{
@@ -77,8 +78,12 @@ public class GameManager : MonoBehaviour
 	{
 		for (int y = 0; y < levelSize.y; y++) {
 			for (int x = 0; x < levelSize.x; x++) {
-				InstantiateObject(rockPrefab, new Vector2(x, y));
+				gridPositions.Add(new Vector2(x, y));
 			}
+		}
+
+		foreach (Vector2 pos in gridPositions) {
+			InstantiateObject(rockPrefab, new Vector2(pos.x, pos.y));
 		}
 	}
 

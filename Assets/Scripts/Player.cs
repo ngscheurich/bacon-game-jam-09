@@ -22,9 +22,6 @@ public class Player : MonoBehaviour
 			DestroyObject(this);
 
 		DontDestroyOnLoad(transform.gameObject);
-
-		Bounds bounds = GetComponent<SpriteRenderer>().sprite.bounds;
-
 	}
 
 	public void AdjustSanity(int amount)
