@@ -72,11 +72,18 @@ public class GameManager : MonoBehaviour
 
 	void GenerateLevel()
 	{
-		Debug.Log(wallPrefab.transform.lossyScale);
-
+		SpriteRenderer sprintRenderer = wallPrefab.GetComponent<SpriteRenderer>();
+		Vector2 spriteSize = new Vector2(sprintRenderer.bounds.extents.x * 2, sprintRenderer.bounds.extents.y * 2);
 		string text = "";
 		try {
 			text = File.ReadAllText(string.Format("{0}/{1}.txt", dataPath, "Level" + depth));
+			Vector2 currentGridPosition = new Vector2(0, 0);
+
+			foreach(char c in text) {
+				string msg = (c.ToString() == "#") ? "Found a wall!" : "Found empty space..."; 
+				Debug.Log(msg);
+			}
+
 			Vector2 currentPosition = new Vector2(0f, levelHeight);
 
 			foreach(char c in text) {
@@ -84,12 +91,16 @@ public class GameManager : MonoBehaviour
 					GameObject clone = (GameObject)Instantiate(wallPrefab);
 					clone.transform.parent = transform;
 					clone.transform.position = currentPosition;
+					Debug.Log(currentPosition);
 				}
 
-				float nextX = (currentPosition.x == levelWidth) ? 0 : currentPosition.x + 1;
-				float nextY = (currentPosition.x == levelWidth) ? currentPosition.y - 1 : currentPosition.y;
+				float nextX = (currentPosition.x == levelWidth) ? 0 : currentPosition.x + spriteSize.x;
+				float nextY = (currentPosition.x == levelWidth) ? currentPosition.y - spriteSize.y : currentPosition.y;
+
+
 
 				Vector2 nextPosition = new Vector2(nextX, nextY);
+
 				currentPosition = nextPosition;
 			}
 		} catch(Exception e) {
