@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 	public int mentalHealth = 100;
 	public Text mentalHealthText;
 	public int triggerSusceptibility = 1;
+	public Quest currentQuest;
 
 	void Awake()
 	{
