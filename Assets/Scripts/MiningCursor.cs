@@ -49,7 +49,7 @@ public class MiningCursor : MonoBehaviour
 						if (miningEventChance <= miningEvent.Chance) {
 							int minerIndex = Random.Range(0, gameManager.miners.Count);
 							Miner miner = gameManager.miners[minerIndex];
-							string description = string.Format(Genderize(miner.Gender, miningEvent.Description), miner.Name);
+							string description = PersonalizeDescription(miner, miningEvent.Description);
 							Debug.Log(description);
 						} else {
 							Debug.Log("Nothing happens...");
@@ -60,20 +60,21 @@ public class MiningCursor : MonoBehaviour
 		}
 	}
 
-	string Genderize(string gender, string str)
+	string PersonalizeDescription(Miner miner, string description)
 	{
-		if (gender == "male") {
-			str.Replace("{he/she}", "he");
-			str.Replace("{him/her}", "him");
-			str.Replace("{himself/herself}", "himself");
-			str.Replace("{his/her}", "his");
-		} else if (gender == "female") {
-			str.Replace("{he/she}", "she");
-			str.Replace("{him/her}", "her");
-			str.Replace("{himself/herself}", "herself");
-			str.Replace("{his/her}", "her");
+		description = description.Replace("{name}", miner.Name);
+		if (miner.Gender == "male") {
+			description = description.Replace("{he/she}", "he");
+			description = description.Replace("{him/her}", "him");
+			description = description.Replace("{himself/herself}", "himself");
+			description = description.Replace("{his/her}", "his");
+		} else if (miner.Gender == "female") {
+			description = description.Replace("{he/she}", "she");
+			description = description.Replace("{him/her}", "her");
+			description = description.Replace("{himself/herself}", "herself");
+			description = description.Replace("{his/her}", "her");
 		}
-		return str;
+		return description;
 	}
 
 	IEnumerator Move()

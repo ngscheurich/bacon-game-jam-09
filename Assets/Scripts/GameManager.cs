@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 	public float timeFactor = 8;
 	public int depth = 1;
 	public int morale = 100;
+	public int minerCount = 5;
 	
 	public enum Phases { Mining, Exploring }
 	public Phases phase = Phases.Mining;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
 	public Text depthText;
 	public Text moraleText;
 	public List<Artifact> artifacts = new List<Artifact>();
+	public List<Miner> allMiners = new List<Miner>();
 	public List<Miner> miners = new List<Miner>();
 	public List<MiningEvent> miningEvents = new List<MiningEvent>();
 
@@ -142,12 +144,25 @@ public class GameManager : MonoBehaviour
 		StringReader input = GetDataInput("Miners");
 		
 		try {
+			List<Miner> allMiners = new List<Miner>();
 			Miner[] minerData = deserializer.Deserialize<Miner[]>(input);
 			foreach (Miner miner in minerData) {
-				miners.Add(miner);
+				allMiners.Add(miner);
 			}
 		} catch(Exception e) {
 			Debug.LogException(e);
+		}
+	}
+
+	void RecruitMiners()
+	{
+		int i = 0;
+		while (i <= minerCount) {
+			int random = UnityEngine.Random.Range(0, allMiners.Count);
+			Miner miner = allMiners[random];
+			miners.Add(miner);
+			Debug.Log(i + ". " + miner.Name);
+			allMiners.Remove(miner);
 		}
 	}
 
