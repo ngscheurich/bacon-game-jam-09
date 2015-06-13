@@ -12,16 +12,19 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager instance = null;
 
-	public Player player;
 	public int currentDay = 1;
 	public float timeFactor = 8;
 	public int depth = 0;
+	public int morale = 100;
 
-	public Text currentDateText;
-	public Text currentTimeText;
+	public Text timeText;
+	public Text dateText;
+	public Text depthText;
+	public Text moraleText;
 	public Artifact baseArtifact;
 
-	private DateTime initialDateTime = new DateTime(1983, 12, 12, 23, 58, 0);
+	private Player player;
+	private DateTime initialDateTime = new DateTime(1823, 12, 3, 8, 0, 0);
 	private DateTime currentDateTime;
 	private List<Artifact> artifacts = new List<Artifact>();
 	private bool initializing;
@@ -56,7 +59,11 @@ public class GameManager : MonoBehaviour
 	void Update()
 	{
 		if (initializing) return;
-	}
+		string depthString = depth.ToString();
+		depthText.text = depthString;
+		string moraleString = morale.ToString();
+		moraleText.text = moraleString;
+  	}
 
 	IEnumerator AdvanceTime()
 	{
@@ -68,8 +75,8 @@ public class GameManager : MonoBehaviour
 
 			currentDay = daysDelta + 1;
 
-			currentDateText.text = string.Format("Day {0} - {1}", currentDay, currentDateTime.DayOfWeek);
-			currentTimeText.text = currentDateTime.ToShortTimeString();
+			dateText.text = string.Format(currentDateTime.ToString("MMM d, yyyy"));
+			timeText.text = currentDateTime.ToShortTimeString();
 
 			yield return new WaitForSeconds(1);
 		}
@@ -80,7 +87,7 @@ public class GameManager : MonoBehaviour
 		string text = "";
 		string dataPath = "Assets/Data";
 		try {
-			text = File.ReadAllText(string.Format("{0}/{1}", dataPath, filename));
+			text = File.ReadAllText(string.Format("{0}/{1}.yml", dataPath, filename));
 		} catch(Exception e) {
 			Debug.LogException(e);
 		}
@@ -89,19 +96,19 @@ public class GameManager : MonoBehaviour
 
 	void LoadArtifacts()
 	{
-		StringReader input = GetDataInput("enemies.yml");
+		StringReader input = GetDataInput("Artifacts");
 
 		try {
-			Artifact[] artifactData = deserializer.Deserialize<Artifact[]>(input);
+			ArtifactData[] artifactData = deserializer.Deserialize<ArtifactData[]>(input);
 
-			foreach (Artifact artifact in artifactData) {
-				Enemy enemyClone = (Enemy)Instantiate(baseEnemy);
+			foreach (ArtifactData artifact in artifactData) {
+				Artifact clone = (Artifact)Instantiate(baseArtifact);
 
-				enemyClone.transform.parent = transform;
-				enemyClone.description = enemy.Description;
-				enemyClone.severity = enemy.Severity;
+				clone.transform.parent = transform;
+				clone.description = artifact.Description;
+				clone.minDepth = artifact.MinDepth;
 
-				enemies.Add(enemyClone);
+				artifacts.Add(clone);
 			}
 		} catch(Exception e) {
 			Debug.LogException(e);
