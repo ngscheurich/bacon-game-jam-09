@@ -6,14 +6,16 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
 	public static Player instance = null;
-	public int mentalHealth = 100;
-	public int fatigue = 10;
-	public int damageSusceptibility = 1;
+
+	public int sanity = 100;
+	public int health = 100;
+	public int fatigue = 0;
+
+	public int strength = 10;
+	public int dexterity = 10;
+	public int charisma = 10;
+	
 	public int fatigueFactor = 1;
-	public int sleepQuality = 1;
-	public Quest currentQuest;
-	public Text mentalHealthText;
-	public Text fatigueText;
 
 	void Awake()
 	{
@@ -23,30 +25,20 @@ public class Player : MonoBehaviour
 			DestroyObject(this);
 
 		DontDestroyOnLoad(transform.gameObject);
-
-		AdjustMentalHealth(0);
-		AdjustFatigue(0);
 	}
 
-	public void AdjustMentalHealth(int amount)
+	public void AdjustSanity(int amount)
 	{
-		mentalHealth += amount;
-		mentalHealthText.text = "Mental Health: " + mentalHealth;
+		sanity += amount;
 	}
+
+	public void AdjustHealth(int amount)
+	{
+		health += amount;
+  	}
 
 	public void AdjustFatigue(int amount)
 	{
 		fatigue += amount;
-		fatigueText.text = "Fatigue: " + fatigue;
-	}
-
-	public void TakeDamage(int amount)
-	{
-		AdjustMentalHealth(amount * damageSusceptibility);
-	}
-
-	public void Sleep(int minutes)
-	{
-		fatigue += minutes * sleepQuality;
-	}
+  	}
 }

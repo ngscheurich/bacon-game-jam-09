@@ -11,19 +11,19 @@ using YamlDotNet.Serialization.NamingConventions;
 public class GameManager : MonoBehaviour
 {
 	public static GameManager instance = null;
+
 	public Player player;
 	public int currentDay = 1;
 	public float timeFactor = 8;
+	public int depth = 0;
+
 	public Text currentDateText;
 	public Text currentTimeText;
-	public Enemy baseEnemy;
-	public Quest baseQuest;
-	public bool isWeekday;
+	public Artifact baseArtifact;
 
 	private DateTime initialDateTime = new DateTime(1983, 12, 12, 23, 58, 0);
 	private DateTime currentDateTime;
-	private List<Enemy> enemies = new List<Enemy>();
-	private List<Quest> quests = new List<Quest>();
+	private List<Artifact> artifacts = new List<Artifact>();
 	private bool initializing;
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
 
@@ -49,8 +49,7 @@ public class GameManager : MonoBehaviour
 	{
 		initializing = true;
 		player = Player.instance;
-		LoadEnemies();
-		LoadQuests();
+		LoadArtifacts();
 		initializing = false;
 	}
 
@@ -63,11 +62,6 @@ public class GameManager : MonoBehaviour
 	{
 		while (true) {
 			currentDateTime = currentDateTime.AddMinutes(1 * timeFactor);
-
-			if (currentDateTime.DayOfWeek == DayOfWeek.Saturday || currentDateTime.DayOfWeek == DayOfWeek.Sunday)
-				isWeekday = false;
-			else
-				isWeekday = true;
 
 			TimeSpan dateTimeDelta = currentDateTime.Subtract(initialDateTime);
 			int daysDelta = dateTimeDelta.Days;
@@ -93,14 +87,14 @@ public class GameManager : MonoBehaviour
 		return new StringReader(text);
 	}
 
-	void LoadEnemies()
+	void LoadArtifacts()
 	{
 		StringReader input = GetDataInput("enemies.yml");
 
 		try {
-			EnemyData[] enemyData = deserializer.Deserialize<EnemyData[]>(input);
+			Artifact[] artifactData = deserializer.Deserialize<Artifact[]>(input);
 
-			foreach (EnemyData enemy in enemyData) {
+			foreach (Artifact artifact in artifactData) {
 				Enemy enemyClone = (Enemy)Instantiate(baseEnemy);
 
 				enemyClone.transform.parent = transform;
@@ -113,67 +107,10 @@ public class GameManager : MonoBehaviour
 			Debug.LogException(e);
 		}
 	}
-
-	void LoadQuests()
-	{
-		StringReader input = GetDataInput("quests.yml");
-
-		try {
-			QuestData[] questData = deserializer.Deserialize<QuestData[]>(input);
-
-			foreach (QuestData quest in questData) {
-				Quest questClone = (Quest)Instantiate(baseQuest);
-
-				questClone.transform.parent = transform;
-				questClone.title = quest.Title;
-				questClone.description = quest.Description;
-				questClone.startTimeSpan = new TimeSpan(quest.StartTimeHour, quest.StartTimeMin, 0);
-				foreach (string day in quest.ValidDays) {
-					switch (day) {
-						case "sunday":
-							questClone.validDays.sunday = true;
-							break;
-						case "monday":
-							questClone.validDays.monday = true;
-							break;
-						case "tuesday":
-							questClone.validDays.tuesday = true;
-							break;
-						case "wednesday":
-							questClone.validDays.wednesday = true;
-							break;
-						case "thursday":
-							questClone.validDays.thursday = true;
-							break;
-						case "friday":
-							questClone.validDays.friday = true;
-							break;
-						case "saturday":
-							questClone.validDays.saturday = true;
-							break;
-					}
-				}
-
-				quests.Add(questClone);
-			}
-		} catch(Exception e) {
-			Debug.LogException(e);
-		}
-	}
 }
 
-class EnemyData
+class ArtifactData
 {
 	public string Description { get; set; }
-	public int Severity { get; set; }
-}
-
-
-class QuestData
-{
-	public string Title { get; set; }
-	public string Description { get; set; }
-	public int StartTimeHour { get; set; }
-	public int StartTimeMin { get; set; }
-	public string[] ValidDays { get; set; }
+	public int MinDepth { get; set; }
 }

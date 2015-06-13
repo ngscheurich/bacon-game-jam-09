@@ -409,6 +409,100 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 720710221}
+--- !u!1001 &956788725
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 441028, guid: 9aa48b95aa35c471fa81957006b31c5b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 565.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 441028, guid: 9aa48b95aa35c471fa81957006b31c5b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 269
+      objectReference: {fileID: 0}
+    - target: {fileID: 441028, guid: 9aa48b95aa35c471fa81957006b31c5b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441028, guid: 9aa48b95aa35c471fa81957006b31c5b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441028, guid: 9aa48b95aa35c471fa81957006b31c5b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441028, guid: 9aa48b95aa35c471fa81957006b31c5b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441028, guid: 9aa48b95aa35c471fa81957006b31c5b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 441028, guid: 9aa48b95aa35c471fa81957006b31c5b, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 9aa48b95aa35c471fa81957006b31c5b, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &1464162944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 163138, guid: 9aa48b95aa35c471fa81957006b31c5b, type: 2}
+  m_PrefabInternal: {fileID: 956788725}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1464162946}
+  - 114: {fileID: 1464162945}
+  m_Layer: 0
+  m_Name: Quest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1464162945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11473684, guid: 9aa48b95aa35c471fa81957006b31c5b,
+    type: 2}
+  m_PrefabInternal: {fileID: 956788725}
+  m_GameObject: {fileID: 1464162944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53f3b5af726649b49e4f130e0d03da7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: 
+  description: 
+  startTime: 
+  duration: 0
+  validDays:
+    sunday: 0
+    monday: 0
+    tuesday: 0
+    wednesday: 0
+    thursday: 0
+    friday: 0
+    saturday: 0
+--- !u!4 &1464162946
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 441028, guid: 9aa48b95aa35c471fa81957006b31c5b, type: 2}
+  m_PrefabInternal: {fileID: 956788725}
+  m_GameObject: {fileID: 1464162944}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 565.5, y: 269, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!1 &1560296491
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,6 +812,33 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 2143911626}
   m_Script: {fileID: 11500000, guid: b2011d0e8b0294c2a8428e0055a09f69, type: 3}
+--- !u!1 &2039814843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2039814844}
+  m_Layer: 0
+  m_Name: Artifact
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2039814844
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2039814843}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 565.5, y: 269, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
 --- !u!1001 &2087928991
 Prefab:
   m_ObjectHideFlags: 0
