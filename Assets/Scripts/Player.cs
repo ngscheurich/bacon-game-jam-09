@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 
 public class Player : MonoBehaviour
@@ -7,10 +8,12 @@ public class Player : MonoBehaviour
 	public static Player instance = null;
 	public int mentalHealth = 100;
 	public int fatigue = 10;
+	public int damageSusceptibility = 1;
+	public int fatigueFactor = 1;
+	public int sleepQuality = 1;
+	public Quest currentQuest;
 	public Text mentalHealthText;
 	public Text fatigueText;
-	public int damageSusceptibility = 1;
-	public Quest currentQuest;
 
 	void Awake()
 	{
@@ -40,5 +43,10 @@ public class Player : MonoBehaviour
 	public void TakeDamage(int amount)
 	{
 		AdjustMentalHealth(amount * damageSusceptibility);
+	}
+
+	public void Sleep(int minutes)
+	{
+		fatigue += minutes * sleepQuality;
 	}
 }

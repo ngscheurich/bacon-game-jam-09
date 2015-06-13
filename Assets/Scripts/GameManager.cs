@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 	public static GameManager instance = null;
 	public Player player;
 	public int currentDay = 1;
-	public float timeScale = 8;
+	public float timeFactor = 8;
 	public Text currentDateText;
 	public Text currentTimeText;
 	public Enemy baseEnemy;
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
 	IEnumerator AdvanceTime()
 	{
 		while (true) {
-			currentDateTime = currentDateTime.AddMinutes(1 * timeScale);
+			currentDateTime = currentDateTime.AddMinutes(1 * timeFactor);
 
 			if (currentDateTime.DayOfWeek == DayOfWeek.Saturday || currentDateTime.DayOfWeek == DayOfWeek.Sunday)
 				isWeekday = false;
@@ -128,7 +128,31 @@ public class GameManager : MonoBehaviour
 				questClone.title = quest.Title;
 				questClone.description = quest.Description;
 				questClone.startTimeSpan = new TimeSpan(quest.StartTimeHour, quest.StartTimeMin, 0);
-
+				foreach (string day in quest.ValidDays) {
+					switch (day) {
+						case "sunday":
+							questClone.validDays.sunday = true;
+							break;
+						case "monday":
+							questClone.validDays.monday = true;
+							break;
+						case "tuesday":
+							questClone.validDays.tuesday = true;
+							break;
+						case "wednesday":
+							questClone.validDays.wednesday = true;
+							break;
+						case "thursday":
+							questClone.validDays.thursday = true;
+							break;
+						case "friday":
+							questClone.validDays.friday = true;
+							break;
+						case "saturday":
+							questClone.validDays.saturday = true;
+							break;
+					}
+				}
 
 				quests.Add(questClone);
 			}
