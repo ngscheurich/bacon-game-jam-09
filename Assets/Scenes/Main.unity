@@ -852,31 +852,9 @@ Prefab:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: currentDateTimeText
-      value: 
-      objectReference: {fileID: 75915357}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: baseQuest
-      value: 
-      objectReference: {fileID: 11473684, guid: 9aa48b95aa35c471fa81957006b31c5b,
-        type: 2}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: currentDateText
-      value: 
-      objectReference: {fileID: 75915357}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: currentTimeText
-      value: 
-      objectReference: {fileID: 1678363210}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
       propertyPath: player
       value: 
       objectReference: {fileID: 1973957694}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: baseArtifact
-      value: 
-      objectReference: {fileID: 11482606, guid: 8224705cf77d846ec997d5f8a5e4ab7b,
-        type: 2}
     - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
       propertyPath: dateText
       value: 
@@ -893,26 +871,6 @@ Prefab:
       propertyPath: moraleText
       value: 
       objectReference: {fileID: 720710223}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: depth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: wallPrefab
-      value: 
-      objectReference: {fileID: 192558, guid: 190559c185c1b43d6bb353e0979cdf49, type: 2}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: rockPrefab
-      value: 
-      objectReference: {fileID: 170046, guid: 2ef543996666540f7a9aac9756a61f44, type: 2}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: levelSize.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: levelSize.y
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
   m_IsPrefabParent: 0

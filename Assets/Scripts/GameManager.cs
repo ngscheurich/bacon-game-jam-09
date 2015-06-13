@@ -15,12 +15,10 @@ public class GameManager : MonoBehaviour
 	public int currentDay = 1;
 	public float timeFactor = 8;
 	public int depth = 1;
-	public int morale = 100;
+	public int morale;
 	public int minerCount = 5;
-	
 	public enum Phases { Mining, Exploring }
 	public Phases phase = Phases.Mining;
-
 	public Player player;	
 	public Text dateText;
 	public Text timeText;
@@ -34,8 +32,8 @@ public class GameManager : MonoBehaviour
 	private string dataPath = "Assets/Data";
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
 	private DateTime currentDateTime;
-
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
+	private int maxMorale;
 	private bool initializing;
 
 	void Awake()
@@ -64,14 +62,18 @@ public class GameManager : MonoBehaviour
 		LoadArtifacts();
 		LoadMiners();
 		LoadMiningEvents();
+		RecruitMiners();
 		initializing = false;
 	}
 
 	void Update()
 	{
 		if (initializing) return;
+
 		string depthString = string.Format("Depth: {0}00 ft", depth.ToString());
 		depthText.text = depthString;
+
+		maxMorale = miners.Count * 100;
 		string moraleString = string.Format("Morale: {0}", morale.ToString());
 		moraleText.text = moraleString;
   	}
@@ -144,7 +146,6 @@ public class GameManager : MonoBehaviour
 		StringReader input = GetDataInput("Miners");
 		
 		try {
-			List<Miner> allMiners = new List<Miner>();
 			Miner[] minerData = deserializer.Deserialize<Miner[]>(input);
 			foreach (Miner miner in minerData) {
 				allMiners.Add(miner);
@@ -157,12 +158,13 @@ public class GameManager : MonoBehaviour
 	void RecruitMiners()
 	{
 		int i = 0;
-		while (i <= minerCount) {
+		while (i < minerCount) {
 			int random = UnityEngine.Random.Range(0, allMiners.Count);
 			Miner miner = allMiners[random];
 			miners.Add(miner);
-			Debug.Log(i + ". " + miner.Name);
+			miner.morale = 100;
 			allMiners.Remove(miner);
+			i++;
 		}
 	}
 
@@ -191,6 +193,21 @@ public class Miner
 {
 	public string Name { get; set; }
 	public string Gender { get; set; }
+	public int morale;
+
+	public void adjustMorale(int amount)
+	{
+		int moraleDelta = morale + amount;
+		if (moraleDelta <= 0) BecomeInsane();
+		morale+= amount;
+		if (morale > 100) morale = 100;
+		GameManager.instance.morale+= amount;
+	}
+
+	public void BecomeInsane()
+	{
+
+	}
 }
 
 public class MiningEvent

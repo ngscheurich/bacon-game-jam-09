@@ -39,11 +39,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd6bc11481e74ff3b9acc159a3ead01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   currentDay: 1
-  timeIncrementFactor: 8
-  currentDateTimeText: {fileID: 0}
-  baseEnemy: {fileID: 11439646, guid: ed7e27d4fe080490ba8bc270dee871b4, type: 2}
+  timeFactor: 8
+  depth: 1
+  morale: 100
+  minerCount: 5
+  phase: 0
+  player: {fileID: 0}
+  dateText: {fileID: 0}
+  timeText: {fileID: 0}
+  depthText: {fileID: 0}
+  moraleText: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
