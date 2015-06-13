@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 	public Artifact baseArtifact;
   	public Vector2 levelSize = new Vector2(20f, 20f);
 	public List<Vector2> gridPositions = new List<Vector2>();
-	private List<Artifact> artifacts = new List<Artifact>();	
+	public List<Artifact> artifacts = new List<Artifact>();
 
 	private string dataPath = "Assets/Data";
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
