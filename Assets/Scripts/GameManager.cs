@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 	public int minerMorale = 20;
 	public enum Phases { Mining, Exploring }
 	public Phases phase = Phases.Mining;
-	public Player player;	
+	public Player player;
 	public Text dateText;
 	public Text timeText;
 	public Text depthText;

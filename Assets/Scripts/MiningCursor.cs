@@ -4,20 +4,11 @@ using System.Collections.Generic;
 
 public class MiningCursor : MonoBehaviour
 {
-	public static MiningCursor instance = null;
-
 	private GameManager gameManager;
   	private GridManager gridManager;
 
 	void Awake()
 	{
-		if (instance == null)
-			instance = this;
-		else if (instance != this)
-			DestroyObject(this);
-		
-		DontDestroyOnLoad(transform.gameObject);
-
 		gameManager = GameManager.instance;
 		gridManager = GridManager.instance;
 
