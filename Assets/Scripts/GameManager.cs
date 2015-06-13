@@ -4,7 +4,8 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Text;
-using YamlDotNet.RepresentationModel;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
 
 		player = Player.instance;
 
-
+		ParseDataFile("test.yml");
 	}
 
 	void Start()
@@ -49,19 +50,24 @@ public class GameManager : MonoBehaviour
 			yield return new WaitForSeconds(1);
 		}
 	}
-
-	void ParseYaml(string filename)
+	
+	void ParseDataFile(string filename)
 	{
 		string dataPath = "Assets/Data";
 		try {
-			string rawText = File.ReadAllText(string.Format("{0}/{1}.yml", dataPath, filename));
-			StringReader reader = new StringReader(rawText);
-			YamlStream yaml = new YamlStream();
-			yaml.Load(reader);
-			Debug.Log(yaml);
+			string text = File.ReadAllText(string.Format("{0}/{1}", dataPath, filename));
+			StringReader input = new StringReader(text);
+			Deserializer deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
+			DataTrigger trigger = deserializer.Deserialize<DataTrigger>(input);
+			Debug.Log(trigger.Name);
 		} catch(Exception e) {
 			Debug.Log(e.Message);
 		}
 
+	}
+
+	class DataTrigger
+	{
+		public string Name { get; set; }
 	}
 }
