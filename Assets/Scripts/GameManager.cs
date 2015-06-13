@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
 	private DateTime initialDateTime = new DateTime(1983, 12, 12, 23, 58, 0);
 	private DateTime currentDateTime;
 
-
 	void Awake()
 	{
 		if (instance == null)
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
 
 		player = Player.instance;
 
-		ParseDataFile("test.yml");
+		GenerateTriggers();
 	}
 
 	void Start()
@@ -51,23 +50,30 @@ public class GameManager : MonoBehaviour
 		}
 	}
 	
-	void ParseDataFile(string filename)
+	StringReader GetDataInput(string filename)
 	{
 		string dataPath = "Assets/Data";
 		try {
 			string text = File.ReadAllText(string.Format("{0}/{1}", dataPath, filename));
-			StringReader input = new StringReader(text);
-			Deserializer deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
-			DataTrigger trigger = deserializer.Deserialize<DataTrigger>(input);
-			Debug.Log(trigger.Name);
 		} catch(Exception e) {
 			Debug.Log(e.Message);
 		}
+		return new StringReader(text);
+	}
 
+	void GenerateTriggers()
+	{
+		StringReader input = GetDataInput("triggers.yml");
+		Deserializer deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
+		DataTrigger[] triggers = deserializer.Deserialize<DataTrigger>(input);
+		foreach (DataTrigger trigger in triggers) {
+			Debug.Log(trigger.Description);
+		}
 	}
 
 	class DataTrigger
 	{
-		public string Name { get; set; }
+		public string Description { get; set; }
+		public int Severity { get; set; }
 	}
 }
