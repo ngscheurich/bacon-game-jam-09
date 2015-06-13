@@ -14,21 +14,25 @@ public class GameManager : MonoBehaviour
 
 	public int currentDay = 1;
 	public float timeFactor = 8;
-	public int depth = 0;
+	public int depth = 1;
 	public int morale = 100;
 	
 	public Text dateText;
 	public Text timeText;
 	public Text depthText;
 	public Text moraleText;
+	public GameObject wallPrefab;
 	public Artifact baseArtifact;
 
+	private string dataPath = "Assets/Data";
 	private Player player;
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
 	private DateTime currentDateTime;
 	private List<Artifact> artifacts = new List<Artifact>();
 	private bool initializing;
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
+	private int levelWidth = 80;
+	private int levelHeight = 11;
 
 	void Awake()
 	{
@@ -52,6 +56,7 @@ public class GameManager : MonoBehaviour
 	{
 		initializing = true;
 		player = Player.instance;
+		GenerateLevel();
 		LoadArtifacts();
 		initializing = false;
 	}
@@ -64,6 +69,28 @@ public class GameManager : MonoBehaviour
 		string moraleString = string.Format("Morale: {0}", morale.ToString());
 		moraleText.text = moraleString;
   	}
+
+	void GenerateLevel()
+	{
+		string text = "";
+		try {
+			text = File.ReadAllText(string.Format("{0}/{1}.txt", dataPath, "Level" + depth));
+			Vector2 currentPos;
+
+			foreach(char c in text) {
+				currentPos = new Vector2(0, levelHeight);
+				if (c.ToString() == "#") {
+					GameObject clone = (GameObject)Instantiate(wallPrefab);
+					clone.transform.parent = transform;
+					clone.transform = currentPos;
+				}
+				Vector2 newPos = new Vector2(currentPos.x + 1, currentPos.y + 1);
+				currentPos = newPos;
+			}
+		} catch(Exception e) {
+			Debug.LogException(e);
+		}
+	}
 
 	IEnumerator AdvanceTime()
 	{
@@ -85,7 +112,6 @@ public class GameManager : MonoBehaviour
 	StringReader GetDataInput(string filename)
 	{
 		string text = "";
-		string dataPath = "Assets/Data";
 		try {
 			text = File.ReadAllText(string.Format("{0}/{1}.yml", dataPath, filename));
 		} catch(Exception e) {
