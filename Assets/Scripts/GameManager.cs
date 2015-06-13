@@ -31,8 +31,8 @@ public class GameManager : MonoBehaviour
 	private List<Artifact> artifacts = new List<Artifact>();
 	private bool initializing;
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
-	private int levelWidth = 10;
-	private int levelHeight = 10;
+	private int levelWidth = 3;
+	private int levelHeight = 6;
 
 	void Awake()
 	{
@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
 
 	void GenerateLevel()
 	{
+		Debug.Log(wallPrefab.transform.lossyScale);
+
 		string text = "";
 		try {
 			text = File.ReadAllText(string.Format("{0}/{1}.txt", dataPath, "Level" + depth));
@@ -85,7 +87,7 @@ public class GameManager : MonoBehaviour
 				}
 
 				float nextX = (currentPosition.x == levelWidth) ? 0 : currentPosition.x + 1;
-				float nextY = (currentPosition.x == levelWidth) ? currentPosition.y + 1 : currentPosition.y;
+				float nextY = (currentPosition.x == levelWidth) ? currentPosition.y - 1 : currentPosition.y;
 
 				Vector2 nextPosition = new Vector2(nextX, nextY);
 				currentPosition = nextPosition;
