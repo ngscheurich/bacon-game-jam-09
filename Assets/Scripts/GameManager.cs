@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 	public float timeFactor = 8;
 	public int depth = 1;
 	public int morale = 100;
+
+	public Player player;
 	
 	public Text dateText;
 	public Text timeText;
@@ -25,7 +27,6 @@ public class GameManager : MonoBehaviour
 	public Artifact baseArtifact;
 
 	private string dataPath = "Assets/Data";
-	private Player player;
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
 	private DateTime currentDateTime;
 	private List<Artifact> artifacts = new List<Artifact>();
@@ -72,33 +73,40 @@ public class GameManager : MonoBehaviour
 
 	void GenerateLevel()
 	{
-		SpriteRenderer sr = wallPrefab.GetComponent<SpriteRenderer>();
-		Vector2 spriteSize = new Vector2(sr.bounds.extents.x * 2, sr.bounds.extents.y * 2);
+		SpriteRenderer renderer = wallPrefab.GetComponent<SpriteRenderer>();
+		Vector2 spriteSize = new Vector2(renderer.bounds.extents.x * 2, renderer.bounds.extents.y * 2);
 		string text = "";
 		try {
 			text = File.ReadAllText(string.Format("{0}/{1}.txt", dataPath, "Level" + depth));
 			Vector2 currentPosition = new Vector2(0f, 0f);
-			int count = 0;
+
 			foreach(char c in text) {
-				count++;
-				string msg = "I have no idea what that is...";
-				if (c.ToString() == "#")
-					msg = "Found a wall!";
-				else if (c.ToString() == "-")
-					msg = "Found empty space..."; 
-				Debug.Log(count + " " + currentPosition + ": " + msg);
 				float nextX = currentPosition.x + 1;
 				float nextY = currentPosition.y;
-				if (currentPosition.x == levelWidth - 1) {
+
+				string character = c.ToString();
+
+				if (character == "#") {
+					Vector2 spritePosition = new Vector2(currentPosition.x * spriteSize.x, currentPosition.y * spriteSize.y);
+					InstantiateObject(wallPrefab, spritePosition);
+				} else if (character == "\n" || character == "\r" || character == "\r\n") {
 					nextX = 0;
-					nextY = currentPosition.y + 1;
+					nextY = currentPosition.y - 1;
 				}
+
 				Vector2 nextPosition = new Vector2(nextX, nextY);
 				currentPosition = nextPosition;
 			}
 		} catch(Exception e) {
 			Debug.LogException(e);
 		}
+	}
+
+	void InstantiateObject(GameObject objekt, Vector2 position)
+	{
+		GameObject clone = (GameObject)Instantiate(objekt);
+		clone.transform.parent = transform;
+		clone.transform.position = position;
 	}
 
 	IEnumerator AdvanceTime()
