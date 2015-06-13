@@ -6,7 +6,8 @@ public class MiningCursor : MonoBehaviour
 {
 	public static MiningCursor instance = null;
 
-	private GridManager gridManager;
+	private GameManager gameManager;
+  	private GridManager gridManager;
 
 	void Awake()
 	{
@@ -39,7 +40,12 @@ public class MiningCursor : MonoBehaviour
 				if (obj != null) {
 					if (obj.tag == "Rock") {
 						Destroy(obj);
-
+						int max = gameManager.miningEvents.Count;
+						MiningEvent miningEvent = gameManager.miningEvents[Random.Range(0, max)];
+						int miningEventChance = Random.Range(0, 11) * gameManager.depth;
+						if (miningEventChance >= miningEvent.Chance) {
+							Debug.Log(miningEvent.Description);
+						}
 					}
 				}
 			}

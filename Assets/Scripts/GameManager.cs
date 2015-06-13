@@ -25,10 +25,9 @@ public class GameManager : MonoBehaviour
 	public Text timeText;
 	public Text depthText;
 	public Text moraleText;
-	public Artifact artifactPrefab;
-	public Miner minerPrefab;
 	public List<Artifact> artifacts = new List<Artifact>();
 	public List<Miner> miners = new List<Miner>();
+	public List<MiningEvent> miningEvents = new List<MiningEvent>();
 
 	private string dataPath = "Assets/Data";
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
@@ -127,14 +126,9 @@ public class GameManager : MonoBehaviour
 		StringReader input = GetDataInput("Artifacts");
 
 		try {
-			ArtifactData[] artifactData = deserializer.Deserialize<ArtifactData[]>(input);
-
-			foreach (ArtifactData artifact in artifactData) {
-				Artifact clone = (Artifact)Instantiate(artifactPrefab);
-				clone.transform.parent = transform;
-				clone.description = artifact.Description;
-				clone.minDepth = artifact.MinDepth;
-				artifacts.Add(clone);
+			Artifact[] artifactData = deserializer.Deserialize<Artifact[]>(input);
+			foreach (Artifact artifact in artifactData) {
+				artifacts.Add(artifact);
 			}
 		} catch(Exception e) {
 			Debug.LogException(e);
@@ -146,13 +140,9 @@ public class GameManager : MonoBehaviour
 		StringReader input = GetDataInput("Miners");
 		
 		try {
-			MinerData[] minerData = deserializer.Deserialize<MinerData[]>(input);
-			
-			foreach (MinerData miner in minerData) {
-				Miner clone = (Miner)Instantiate(minerPrefab);				
-				clone.transform.parent = transform;
-				clone.name = miner.Name;
-				miners.Add(clone);
+			Miner[] minerData = deserializer.Deserialize<Miner[]>(input);
+			foreach (Miner miner in minerData) {
+				miners.Add(miner);
 			}
 		} catch(Exception e) {
 			Debug.LogException(e);
@@ -161,23 +151,32 @@ public class GameManager : MonoBehaviour
 
 	void LoadMiningEvents()
 	{
-
+		StringReader input = GetDataInput("MiningEvents");
+		
+		try {
+			MiningEvent[] miningEventData = deserializer.Deserialize<MiningEvent[]>(input);
+			foreach (MiningEvent miningEvent in miningEventData) {
+				miningEvents.Add(miningEvent);
+			}
+		} catch(Exception e) {
+			Debug.LogException(e);
+    	}
 	}
 }
 
-class ArtifactData
+public class Artifact
 {
-	public string Description { get; set; }
-	public int MinDepth { get; set; }
+  public string Description { get; set; }
+  public int MinDepth { get; set; }
 }
 
-class MinerData
+public class Miner
 {
-	public string Name { get; set; }
+  public string Name { get; set; }
 }
 
-class MiningEventData
+public class MiningEvent
 {
-	public string Description { get; set; }
-	public float Chance { get; set; }
+  public string Description { get; set; }
+  public float Chance { get; set; }
 }
