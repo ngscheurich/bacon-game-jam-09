@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
 	public float timeFactor = 8;
 	public int depth = 1;
 	public int morale = 100;
+	
+	public enum Phases { Mining, Exploring }
+	public Phases phase = Phases.Mining;
 
 	public Player player;	
 	public Text dateText;
@@ -24,16 +27,15 @@ public class GameManager : MonoBehaviour
 	public Text moraleText;
 	public GameObject rockPrefab;
 	public Artifact baseArtifact;
-  	public Vector2 levelSize = new Vector2(100f, 100f);
+  	public Vector2 levelSize = new Vector2(20f, 20f);
+	public List<Vector2> gridPositions = new List<Vector2>();
+	private List<Artifact> artifacts = new List<Artifact>();	
 
 	private string dataPath = "Assets/Data";
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
 	private DateTime currentDateTime;
-	private List<Artifact> artifacts = new List<Artifact>();
-	private List<Vector2> gridPositions = new List<Vector2>();
+
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
-	private enum Phases { Mining, Exploring }
-	private Phases phase = Phases.Mining;
 	private bool initializing;
 
 	void Awake()
