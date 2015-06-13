@@ -18,7 +18,9 @@ public class Miner : MonoBehaviour
 
 		StartCoroutine(Move());
 	}
-	
+
+
+
 	IEnumerator Move()
 	{
 		while (true) {

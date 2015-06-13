@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 	public GameObject rockPrefab;
 	public Artifact baseArtifact;
   	public Vector2 levelSize = new Vector2(20f, 20f);
+	public Dictionary<Vector2, List<GameObject>> grid = new Dictionary<Vector2, List<GameObject>>();
 	public List<Vector2> gridPositions = new List<Vector2>();
 	public List<Artifact> artifacts = new List<Artifact>();
 
@@ -80,12 +81,9 @@ public class GameManager : MonoBehaviour
 	{
 		for (int y = 0; y < levelSize.y; y++) {
 			for (int x = 0; x < levelSize.x; x++) {
-				gridPositions.Add(new Vector2(x, y));
+				InstantiateObject(rockPrefab, new Vector2(x, y));
+				grid.Add(new Vector2(x, y), new List<GameObject>());
 			}
-		}
-
-		foreach (Vector2 pos in gridPositions) {
-			InstantiateObject(rockPrefab, new Vector2(pos.x, pos.y));
 		}
 	}
 
