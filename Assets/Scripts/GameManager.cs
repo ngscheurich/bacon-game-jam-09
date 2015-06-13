@@ -25,8 +25,10 @@ public class GameManager : MonoBehaviour
 	public Text timeText;
 	public Text depthText;
 	public Text moraleText;
-	public Artifact baseArtifact;
+	public Artifact artifactPrefab;
+	public Miner minerPrefab;
 	public List<Artifact> artifacts = new List<Artifact>();
+	public List<Miner> miners = new List<Miner>();
 
 	private string dataPath = "Assets/Data";
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
@@ -128,17 +130,38 @@ public class GameManager : MonoBehaviour
 			ArtifactData[] artifactData = deserializer.Deserialize<ArtifactData[]>(input);
 
 			foreach (ArtifactData artifact in artifactData) {
-				Artifact clone = (Artifact)Instantiate(baseArtifact);
-
+				Artifact clone = (Artifact)Instantiate(artifactPrefab);
 				clone.transform.parent = transform;
 				clone.description = artifact.Description;
 				clone.minDepth = artifact.MinDepth;
-
 				artifacts.Add(clone);
 			}
 		} catch(Exception e) {
 			Debug.LogException(e);
 		}
+	}
+
+	void LoadMiners()
+	{
+		StringReader input = GetDataInput("Miners");
+		
+		try {
+			MinerData[] minerData = deserializer.Deserialize<MinerData[]>(input);
+			
+			foreach (MinerData miner in minerData) {
+				Miner clone = (Miner)Instantiate(minerPrefab);				
+				clone.transform.parent = transform;
+				clone.name = miner.Name;
+				miners.Add(clone);
+			}
+		} catch(Exception e) {
+			Debug.LogException(e);
+		}
+	}
+
+	void LoadMiningEvents()
+	{
+
 	}
 }
 
@@ -146,4 +169,15 @@ class ArtifactData
 {
 	public string Description { get; set; }
 	public int MinDepth { get; set; }
+}
+
+class MinerData
+{
+	public string Name { get; set; }
+}
+
+class MiningEventData
+{
+	public string Description { get; set; }
+	public float Chance { get; set; }
 }
