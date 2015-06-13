@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 			instance = this;
 		else if (instance != this)
 			DestroyObject(this);
+
 		DontDestroyOnLoad(transform.gameObject);
 
 		AdjustMentalHealth(0);

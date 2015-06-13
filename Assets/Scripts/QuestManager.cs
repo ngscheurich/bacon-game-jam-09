@@ -11,6 +11,7 @@ public class QuestManager : MonoBehaviour
 			instance = this;
 		else if (instance != this)
 			DestroyObject(this);
+
 		DontDestroyOnLoad(transform.gameObject);
 	}
 }

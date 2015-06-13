@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using System;
 using System.Collections;
+using System.IO;
+using System.Text;
+using YamlDotNet.RepresentationModel;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,9 +24,12 @@ public class GameManager : MonoBehaviour
 			instance = this;
 		else if (instance != this)
 			DestroyObject(this);
+
 		DontDestroyOnLoad(transform.gameObject);
 
 		player = Player.instance;
+
+
 	}
 
 	void Start()
@@ -44,4 +50,18 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	void ParseYaml(string filename)
+	{
+		string dataPath = "Assets/Data";
+		try {
+			string rawText = File.ReadAllText(string.Format("{0}/{1}.yml", dataPath, filename));
+			StringReader reader = new StringReader(rawText);
+			YamlStream yaml = new YamlStream();
+			yaml.Load(reader);
+			Debug.Log(yaml);
+		} catch(Exception e) {
+			Debug.Log(e.Message);
+		}
+
+	}
 }
