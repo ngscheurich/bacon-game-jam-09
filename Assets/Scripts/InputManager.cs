@@ -13,5 +13,8 @@ public class InputManager : MonoBehaviour
 	void Update()
 	{
 		player.Move(Input.GetAxisRaw("Horizontal"));
+
+		// if (Input.GetButtonDown("Submit"))
+		// 	Application.LoadLevel("Mining");
 	}
 }

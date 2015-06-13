@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 			DestroyObject(this);
 
 		DontDestroyOnLoad(transform.gameObject);
+
+
 	}
 
 	public void AdjustSanity(int amount)

@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
 	private List<Artifact> artifacts = new List<Artifact>();
 	private bool initializing;
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
+	private enum Phases { Mining, Exploring }
+	private Phases phase = Phases.Mining;
 
 	void Awake()
 	{
@@ -54,7 +56,9 @@ public class GameManager : MonoBehaviour
 	void InitializeGame()
 	{
 		initializing = true;
-		GenerateLevel();
+		player.gameObject.SetActive(false);
+		GenerateGrid();
+		// GenerateLevel();
 		LoadArtifacts();
 		initializing = false;
 	}
@@ -67,6 +71,11 @@ public class GameManager : MonoBehaviour
 		string moraleString = string.Format("Morale: {0}", morale.ToString());
 		moraleText.text = moraleString;
   	}
+
+	void GenerateGrid()
+	{
+
+	}
 
 	void GenerateLevel()
 	{
@@ -104,6 +113,20 @@ public class GameManager : MonoBehaviour
 		GameObject clone = (GameObject)Instantiate(objekt);
 		clone.transform.parent = transform;
 		clone.transform.position = position;
+	}
+
+	IEnumerator Mining()
+	{
+		while (phase == Phases.Mining) {
+			yield return null;
+		}
+	}
+
+	IEnumerator Exploring()
+	{
+		while (phase == Phases.Exploring) {
+			yield return null;
+		}
 	}
 
 	IEnumerator AdvanceTime()
