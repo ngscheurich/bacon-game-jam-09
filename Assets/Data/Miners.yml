@@ -1,17 +1,25 @@
 ---
 -
   name: "Edward"
+  gender: male
 -
   name: "Lacy"
+  gender: female
 -
   name: "Elouise"
+  gender: female
 -
   name: "Johanne"
+  gender: male
 -
   name: "Sammy the Shark"
+  gender: male
 -
   name: "Gunner"
+  gender: male
 -
   name: "Henry"
+  gender: male
 -
   name: "Ms. Evangeline"
+  gender: female

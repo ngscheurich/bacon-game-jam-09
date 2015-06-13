@@ -168,17 +168,19 @@ public class GameManager : MonoBehaviour
 
 public class Artifact
 {
-  public string Description { get; set; }
-  public int MinDepth { get; set; }
+	public string Description { get; set; }
+	public int MinDepth { get; set; }
 }
 
 public class Miner
 {
-  public string Name { get; set; }
+	public string Name { get; set; }
+	public string Gender { get; set; }
 }
 
 public class MiningEvent
 {
-  public string Description { get; set; }
-  public float Chance { get; set; }
+	public string Description { get; set; }
+	public int Terror { get; set; }
+	public float Chance { get; set; }
 }

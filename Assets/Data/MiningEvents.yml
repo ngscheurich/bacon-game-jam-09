@@ -1,6 +1,21 @@
 ---
 -
   description: >
+    {name} thinks {he/she} saw {his/her} shadow step away
+    from the glow of {his/her} gas lamp. No, must've just
+    been a trick of the light...
+  terror: 5
+  chance: 8.0
+-
+  description: >
+    Strange, not-too-distant sounds like the scraping of
+    some nightmarish carapace on the stone cause {name} to
+    lose a bit of {his/her} resolve.
+  terror: 10
+  chance: 5.0
+-
+  description: >
     The otherworldly breezes that intermittently blow
-    through the tunnels leave {0} on edge.
-  chance: 10.0
+    through the tunnels leave {name} on edge.
+  terror: 20
+  chance: 1.0
