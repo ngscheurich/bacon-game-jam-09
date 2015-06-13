@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using YamlDotNet.Serialization;
@@ -14,10 +15,12 @@ public class GameManager : MonoBehaviour
 	public int currentDay = 1;
 	public float timeIncrementFactor = 8;
 	public Text currentDateTimeText;
-	public Trigger triggerPrefab;
+	public Enemy baseEnemy;
 
 	private DateTime initialDateTime = new DateTime(1983, 12, 12, 23, 58, 0);
 	private DateTime currentDateTime;
+	private List<Enemy> enemies;
+	private bool initializing;
 
 	void Awake()
 	{
@@ -28,15 +31,20 @@ public class GameManager : MonoBehaviour
 
 		DontDestroyOnLoad(transform.gameObject);
 
-		player = Player.instance;
-
-		GenerateTriggers();
+		InitializeGame();
 	}
 
 	void Start()
 	{
 		currentDateTime = initialDateTime;
 		StartCoroutine(IncrementTime());
+	}
+
+	void InitializeGame()
+	{
+		initializing = true;
+		player = Player.instance;
+		LoadEnemyData();
 	}
 
 	IEnumerator IncrementTime()
@@ -63,21 +71,22 @@ public class GameManager : MonoBehaviour
 		return new StringReader(text);
 	}
 
-	void GenerateTriggers()
+	void LoadEnemyData()
 	{
 		StringReader input = GetDataInput("triggers.yml");
-		Deserializer deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
-		DataTrigger[] triggers = deserializer.Deserialize<DataTrigger[]>(input);
-		foreach (DataTrigger item in triggers) {
-			Trigger triggerClone = (Trigger)Instantiate(triggerPrefab);
-			triggerClone.transform.parent = transform;
-			triggerClone.description = item.Description;
-			triggerClone.severity = item.Severity;
+		Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
+		EnemyData[] enemyData = deserializer.Deserialize<EnemyData[]>(input);
+		foreach (EnemyData enemy in enemyData) {
+			Enemy enemyClone = (Enemy)Instantiate(baseEnemy);
+			enemyClone.transform.parent = transform;
+			enemyClone.description = enemy.Description;
+			enemyClone.severity = enemy.Severity;
+			enemies.Add(enemyClone);
 		}
 	}
 }
 
-class DataTrigger
+class EnemyData
 {
 	public string Description { get; set; }
 	public int Severity { get; set; }

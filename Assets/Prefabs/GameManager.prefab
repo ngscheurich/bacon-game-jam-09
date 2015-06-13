@@ -40,9 +40,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  currentDay: 8
-  timeIncrementFactor: 10
+  currentDay: 1
+  timeIncrementFactor: 8
   currentDateTimeText: {fileID: 0}
+  baseEnemy: {fileID: 11439646, guid: ed7e27d4fe080490ba8bc270dee871b4, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

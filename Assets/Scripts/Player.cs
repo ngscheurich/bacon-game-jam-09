@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 	public static Player instance = null;
 	public int mentalHealth = 100;
 	public Text mentalHealthText;
-	public int triggerSusceptibility = 1;
+	public int damageSusceptibility = 1;
 	public Quest currentQuest;
 
 	void Awake()
@@ -28,8 +28,8 @@ public class Player : MonoBehaviour
 		mentalHealthText.text = "Mental Health: " + mentalHealth;
 	}
 
-	public void ProcessTrigger(Trigger trigger)
+	public void TakeDamage(int damage)
 	{
-		AdjustMentalHealth(trigger.severity * triggerSusceptibility);
+		AdjustMentalHealth(damage * damageSusceptibility);
 	}
 }
