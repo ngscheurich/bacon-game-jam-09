@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Trigger : MonoBehaviour
 {
-	public string name;
+	public string label;
 	public int severity = 1;
 
 

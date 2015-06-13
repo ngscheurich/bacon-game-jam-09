@@ -242,7 +242,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: .149870262, g: .150256544, b: .20588237, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5771c40e83614f7ab1968652276c8d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: 
+  label: 
   severity: 0
 --- !u!4 &1833162397
 Transform:
@@ -619,49 +619,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
---- !u!1 &2009244368
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2009244370}
-  - 114: {fileID: 2009244371}
-  m_Layer: 0
-  m_Name: Player
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2009244370
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2009244368}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 542.062683, y: 261.930084, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
---- !u!114 &2009244371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2009244368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2011d0e8b0294c2a8428e0055a09f69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mentalHealth: 100
-  mentalHealthText: {fileID: 669370064}
-  triggerSusceptibility: 1
-  currentQuest: {fileID: 0}
 --- !u!1001 &2087928991
 Prefab:
   m_ObjectHideFlags: 0
@@ -701,26 +658,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: mentalHealthText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 2009244371}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: currentTime
-      value: 
-      objectReference: {fileID: 75915357}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: time
-      value: 1435
-      objectReference: {fileID: 0}
-    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
-      propertyPath: currentTimeText
-      value: 
-      objectReference: {fileID: 75915357}
     - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
       propertyPath: currentDateTimeText
       value: 
@@ -790,3 +727,49 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2131481624}
+--- !u!1001 &2143911626
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 404952, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 542.062683
+      objectReference: {fileID: 0}
+    - target: {fileID: 404952, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 261.930084
+      objectReference: {fileID: 0}
+    - target: {fileID: 404952, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 404952, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 404952, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 404952, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 404952, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 404952, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11443304, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f, type: 2}
+      propertyPath: mentalHealthText
+      value: 
+      objectReference: {fileID: 669370064}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f, type: 2}
+  m_IsPrefabParent: 0
