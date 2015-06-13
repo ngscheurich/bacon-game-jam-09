@@ -13,8 +13,9 @@ public class GameManager : MonoBehaviour
 	public static GameManager instance = null;
 	public Player player;
 	public int currentDay = 1;
-	public float timeIncrementFactor = 8;
-	public Text currentDateTimeText;
+	public float timeScale = 8;
+	public Text currentDateText;
+	public Text currentTimeText;
 	public Enemy baseEnemy;
 	public Quest baseQuest;
 	public bool isWeekday;
@@ -53,24 +54,28 @@ public class GameManager : MonoBehaviour
 		initializing = false;
 	}
 
-	void Update() {
+	void Update()
+	{
 		if (initializing) return;
 	}
 
 	IEnumerator IncrementTime()
 	{
 		while (true) {
-			currentDateTime = currentDateTime.AddMinutes(1 * timeIncrementFactor);
+			currentDateTime = currentDateTime.AddMinutes(1 * timeScale);
 
-			if (currentDateTime.DayOfWeek == "Saturday" || currentDateTime.DayOfWeek == "Sunday")
+			if (currentDateTime.DayOfWeek == DayOfWeek.Saturday || currentDateTime.DayOfWeek == DayOfWeek.Sunday)
 				isWeekday = false;
+			else
+				isWeekday = true;
 
 			TimeSpan dateTimeDelta = currentDateTime.Subtract(initialDateTime);
 			int daysDelta = dateTimeDelta.Days;
 
 			currentDay = daysDelta + 1;
 
-			currentDateTimeText.text = string.Format("Day {0} - {1}", currentDay, currentDateTime.ToShortTimeString());
+			currentDateText.text = string.Format("Day {0} - {1}", currentDay, currentDateTime.DayOfWeek);
+			currentTimeText.text = string.Format(currentDateTime.ToShortTimeString());
 
 			yield return new WaitForSeconds(1);
 		}
