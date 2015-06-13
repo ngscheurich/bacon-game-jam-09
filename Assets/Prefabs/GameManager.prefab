@@ -42,8 +42,9 @@ MonoBehaviour:
   currentDay: 1
   timeFactor: 8
   depth: 1
-  morale: 100
+  morale: 0
   minerCount: 5
+  minerMorale: 20
   phase: 0
   player: {fileID: 0}
   dateText: {fileID: 0}

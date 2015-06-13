@@ -43,13 +43,15 @@ public class MiningCursor : MonoBehaviour
 				if (obj != null) {
 					if (obj.tag == "Rock") {
 						Destroy(obj);
-						int miningEventIndex = Random.Range(0, gameManager.miningEvents.Count);
-						MiningEvent miningEvent = gameManager.miningEvents[miningEventIndex];
-						int miningEventChance = Random.Range(0, 11) * gameManager.depth;
-						if (miningEventChance <= miningEvent.Chance) {
+						int eventIndex = Random.Range(0, gameManager.miningEvents.Count);
+						MiningEvent miningEvent = gameManager.miningEvents[eventIndex];
+						int eventChance = Random.Range(0, 11) * gameManager.depth;
+						if (eventChance <= miningEvent.Chance) {
 							int minerIndex = Random.Range(0, gameManager.miners.Count);
 							Miner miner = gameManager.miners[minerIndex];
 							string description = PersonalizeDescription(miner, miningEvent.Description);
+							description += string.Format(" -{0} morale.", miningEvent.Terror);
+							miner.AdjustMorale(-miningEvent.Terror);
 							Debug.Log(description);
 						} else {
 							Debug.Log("Nothing happens...");

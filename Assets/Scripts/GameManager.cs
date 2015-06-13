@@ -15,8 +15,9 @@ public class GameManager : MonoBehaviour
 	public int currentDay = 1;
 	public float timeFactor = 8;
 	public int depth = 1;
-	public int morale;
+	public int morale = 0;
 	public int minerCount = 5;
+	public int minerMorale = 20;
 	public enum Phases { Mining, Exploring }
 	public Phases phase = Phases.Mining;
 	public Player player;	
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
 	public List<Miner> allMiners = new List<Miner>();
 	public List<Miner> miners = new List<Miner>();
 	public List<MiningEvent> miningEvents = new List<MiningEvent>();
-
+	
 	private string dataPath = "Assets/Data";
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
 	private DateTime currentDateTime;
@@ -73,8 +74,8 @@ public class GameManager : MonoBehaviour
 		string depthString = string.Format("Depth: {0}00 ft", depth.ToString());
 		depthText.text = depthString;
 
-		maxMorale = miners.Count * 100;
-		string moraleString = string.Format("Morale: {0}", morale.ToString());
+		maxMorale = miners.Count * minerMorale;
+		string moraleString = string.Format("Morale: {0}/{1}", morale.ToString(), maxMorale.ToString());
 		moraleText.text = moraleString;
   	}
 
@@ -162,7 +163,8 @@ public class GameManager : MonoBehaviour
 			int random = UnityEngine.Random.Range(0, allMiners.Count);
 			Miner miner = allMiners[random];
 			miners.Add(miner);
-			miner.morale = 100;
+			miner.morale = minerMorale;
+			morale = morale + minerMorale;
 			allMiners.Remove(miner);
 			i++;
 		}
@@ -195,13 +197,15 @@ public class Miner
 	public string Gender { get; set; }
 	public int morale;
 
-	public void adjustMorale(int amount)
+	public void AdjustMorale(int amount)
 	{
 		int moraleDelta = morale + amount;
-		if (moraleDelta <= 0) BecomeInsane();
-		morale+= amount;
-		if (morale > 100) morale = 100;
-		GameManager.instance.morale+= amount;
+		if (moraleDelta <= 0)
+			BecomeInsane();
+		else
+			morale+= amount;
+		int totalMoraleAdjustment = (moraleDelta < 0) ? morale : amount;
+		GameManager.instance.morale+= totalMoraleAdjustment;
 	}
 
 	public void BecomeInsane()
