@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 	public int currentDay = 1;
 	public float timeIncrementFactor = 8;
 	public Text currentDateTimeText;
+	public Trigger triggerPrefab;
 
 	private DateTime initialDateTime = new DateTime(1983, 12, 12, 23, 58, 0);
 	private DateTime currentDateTime;
@@ -49,12 +50,13 @@ public class GameManager : MonoBehaviour
 			yield return new WaitForSeconds(1);
 		}
 	}
-	
+
 	StringReader GetDataInput(string filename)
 	{
+		string text = "";
 		string dataPath = "Assets/Data";
 		try {
-			string text = File.ReadAllText(string.Format("{0}/{1}", dataPath, filename));
+			text = File.ReadAllText(string.Format("{0}/{1}", dataPath, filename));
 		} catch(Exception e) {
 			Debug.Log(e.Message);
 		}
@@ -65,15 +67,18 @@ public class GameManager : MonoBehaviour
 	{
 		StringReader input = GetDataInput("triggers.yml");
 		Deserializer deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
-		DataTrigger[] triggers = deserializer.Deserialize<DataTrigger>(input);
-		foreach (DataTrigger trigger in triggers) {
-			Debug.Log(trigger.Description);
+		DataTrigger[] triggers = deserializer.Deserialize<DataTrigger[]>(input);
+		foreach (DataTrigger item in triggers) {
+			Trigger triggerClone = (Trigger)Instantiate(triggerPrefab);
+			triggerClone.transform.parent = transform;
+			triggerClone.description = item.Description;
+			triggerClone.severity = item.Severity;
 		}
 	}
+}
 
-	class DataTrigger
-	{
-		public string Description { get; set; }
-		public int Severity { get; set; }
-	}
+class DataTrigger
+{
+	public string Description { get; set; }
+	public int Severity { get; set; }
 }
