@@ -3,12 +3,15 @@ using System.Collections;
 
 public class InputManager : MonoBehaviour
 {
-	
+	private Player player;
+
+	void Awake()
+	{
+		player = GameManager.instance.player;
+	}
 
 	void Update()
 	{
-	//	Input.GetAxisRaw("Horizontal")
+		player.Move(Input.GetAxisRaw("Horizontal"));
 	}
-
-
 }

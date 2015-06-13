@@ -32,8 +32,6 @@ public class GameManager : MonoBehaviour
 	private List<Artifact> artifacts = new List<Artifact>();
 	private bool initializing;
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
-	private int levelWidth = 2;
-	private int levelHeight = 2;
 
 	void Awake()
 	{
