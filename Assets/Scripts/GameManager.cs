@@ -16,15 +16,15 @@ public class GameManager : MonoBehaviour
 	public float timeFactor = 8;
 	public int depth = 0;
 	public int morale = 100;
-
-	public Text timeText;
+	
 	public Text dateText;
+	public Text timeText;
 	public Text depthText;
 	public Text moraleText;
 	public Artifact baseArtifact;
 
 	private Player player;
-	private DateTime initialDateTime = new DateTime(1823, 12, 3, 8, 0, 0);
+	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
 	private DateTime currentDateTime;
 	private List<Artifact> artifacts = new List<Artifact>();
 	private bool initializing;
@@ -59,9 +59,9 @@ public class GameManager : MonoBehaviour
 	void Update()
 	{
 		if (initializing) return;
-		string depthString = depth.ToString();
+		string depthString = string.Format("Depth: {0}", depth.ToString());
 		depthText.text = depthString;
-		string moraleString = morale.ToString();
+		string moraleString = string.Format("Morale: {0}", morale.ToString());
 		moraleText.text = moraleString;
   	}
 

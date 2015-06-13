@@ -825,6 +825,22 @@ Prefab:
       value: 
       objectReference: {fileID: 11482606, guid: 8224705cf77d846ec997d5f8a5e4ab7b,
         type: 2}
+    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
+      propertyPath: dateText
+      value: 
+      objectReference: {fileID: 75915357}
+    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
+      propertyPath: timeText
+      value: 
+      objectReference: {fileID: 1678363210}
+    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
+      propertyPath: depthText
+      value: 
+      objectReference: {fileID: 669370064}
+    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
+      propertyPath: moraleText
+      value: 
+      objectReference: {fileID: 720710223}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
   m_IsPrefabParent: 0
