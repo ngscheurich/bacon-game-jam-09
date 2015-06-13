@@ -722,7 +722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1734716490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1004,11 +1004,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 6116894, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f, type: 2}
       propertyPath: m_Size.x
-      value: .600000024
+      value: .449999988
       objectReference: {fileID: 0}
     - target: {fileID: 6116894, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f, type: 2}
       propertyPath: m_Size.y
-      value: .600000024
+      value: .639999986
+      objectReference: {fileID: 0}
+    - target: {fileID: 5036580, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f, type: 2}
+      propertyPath: m_FixedAngle
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f, type: 2}
