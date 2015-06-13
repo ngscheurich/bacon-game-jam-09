@@ -10,9 +10,6 @@ public class Player : MonoBehaviour
 	public int sanity = 100;
 	public int health = 100;
 	public int fatigue = 0;
-	public int strength = 10;
-	public int dexterity = 10;
-	public int charisma = 10;
 	public int speed = 10;
 	
 	public int fatigueFactor = 1;

@@ -17,8 +17,7 @@ public class GameManager : MonoBehaviour
 	public int depth = 1;
 	public int morale = 100;
 
-	public Player player;
-	
+	public Player player;	
 	public Text dateText;
 	public Text timeText;
 	public Text depthText;
@@ -47,6 +46,7 @@ public class GameManager : MonoBehaviour
 
 	void Start()
 	{
+
 		currentDateTime = initialDateTime;
 		StartCoroutine(AdvanceTime());
 	}
@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
 	void InitializeGame()
 	{
 		initializing = true;
-		player = Player.instance;
 		GenerateLevel();
 		LoadArtifacts();
 		initializing = false;
