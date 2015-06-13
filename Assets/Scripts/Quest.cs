@@ -6,5 +6,13 @@ public class Quest : MonoBehaviour
 {
 	public string title;
 	public string description;
-	public int dueBy;
+	public string dueBy;
+	public int duration;
+	public TimeSpan dueByTimeSpan;
+	public bool validOnWeekend;
+
+	void Awake()
+	{
+		dueBy = dueByTimeSpan.ToString();
+	}
 }

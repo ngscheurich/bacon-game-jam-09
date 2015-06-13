@@ -1,0 +1,13 @@
+---
+-
+  description: >
+    That seemed like something your friend sometimes does.
+    Are you, or are you your friend? Did you choose to do
+    that or was your brain taken over?
+  severity: 4
+-
+  description: >
+    You breathed in a bad pattern. You should make sure you
+    breathe in a good pattern a few time before you
+    continue.
+  severity: 2

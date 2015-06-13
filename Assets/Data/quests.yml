@@ -3,4 +3,6 @@
   title: "Go To School"
   description: >
     Gotta go to school today.
-  due_by: 1200
+  due_by_hour: 6
+  due_by_min: 30
+  valid_on_weekend: false

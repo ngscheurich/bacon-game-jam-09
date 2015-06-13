@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 	void Start()
 	{
 		currentDateTime = initialDateTime;
-		StartCoroutine(IncrementTime());
+		StartCoroutine(AdvanceTime());
 	}
 
 	void InitializeGame()
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 		if (initializing) return;
 	}
 
-	IEnumerator IncrementTime()
+	IEnumerator AdvanceTime()
 	{
 		while (true) {
 			currentDateTime = currentDateTime.AddMinutes(1 * timeScale);
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
 			currentDay = daysDelta + 1;
 
 			currentDateText.text = string.Format("Day {0} - {1}", currentDay, currentDateTime.DayOfWeek);
-			currentTimeText.text = string.Format(currentDateTime.ToShortTimeString());
+			currentTimeText.text = currentDateTime.ToShortTimeString();
 
 			yield return new WaitForSeconds(1);
 		}
@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
 			questClone.transform.parent = transform;
 			questClone.title = quest.Title;
 			questClone.description = quest.Description;
-			questClone.dueBy = quest.DueBy;
+			questClone.dueByTimeSpan = new TimeSpan(quest.DueByHour, quest.DueByMin, 0);
 			quests.Add(questClone);
 		}
 	}
@@ -132,5 +132,6 @@ class QuestData
 {
 	public string Title { get; set; }
 	public string Description { get; set; }
-	public int DueBy { get; set; }
+	public int DueByHour { get; set; }
+	public int DueByMin { get; set; }
 }

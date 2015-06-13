@@ -712,6 +712,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1973957694 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11443304, guid: 1c50acb7fa1fe4ee0b9b6bc3b315af8f,
+    type: 2}
+  m_PrefabInternal: {fileID: 2143911626}
+  m_Script: {fileID: 11500000, guid: b2011d0e8b0294c2a8428e0055a09f69, type: 3}
 --- !u!1001 &2087928991
 Prefab:
   m_ObjectHideFlags: 0
@@ -768,6 +774,10 @@ Prefab:
       propertyPath: currentTimeText
       value: 
       objectReference: {fileID: 1678363210}
+    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1973957694}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
   m_IsPrefabParent: 0
