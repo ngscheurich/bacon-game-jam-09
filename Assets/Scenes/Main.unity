@@ -621,6 +621,11 @@ Prefab:
       propertyPath: currentDateTimeText
       value: 
       objectReference: {fileID: 75915357}
+    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
+      propertyPath: baseQuest
+      value: 
+      objectReference: {fileID: 11473684, guid: 9aa48b95aa35c471fa81957006b31c5b,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
   m_IsPrefabParent: 0

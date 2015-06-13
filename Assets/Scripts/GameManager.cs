@@ -16,11 +16,15 @@ public class GameManager : MonoBehaviour
 	public float timeIncrementFactor = 8;
 	public Text currentDateTimeText;
 	public Enemy baseEnemy;
+	public Quest baseQuest;
+	public bool isWeekday;
 
 	private DateTime initialDateTime = new DateTime(1983, 12, 12, 23, 58, 0);
 	private DateTime currentDateTime;
-	private List<Enemy> enemies;
+	private List<Enemy> enemies = new List<Enemy>();
+	private List<Quest> quests = new List<Quest>();
 	private bool initializing;
+	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
 
 	void Awake()
 	{
@@ -44,17 +48,30 @@ public class GameManager : MonoBehaviour
 	{
 		initializing = true;
 		player = Player.instance;
-		LoadEnemyData();
+		LoadEnemies();
+		LoadQuests();
+		initializing = false;
+	}
+
+	void Update() {
+		if (initializing) return;
 	}
 
 	IEnumerator IncrementTime()
 	{
 		while (true) {
 			currentDateTime = currentDateTime.AddMinutes(1 * timeIncrementFactor);
+
+			if (currentDateTime.DayOfWeek == "Saturday" || currentDateTime.DayOfWeek == "Sunday")
+				isWeekday = false;
+
 			TimeSpan dateTimeDelta = currentDateTime.Subtract(initialDateTime);
 			int daysDelta = dateTimeDelta.Days;
+
 			currentDay = daysDelta + 1;
+
 			currentDateTimeText.text = string.Format("Day {0} - {1}", currentDay, currentDateTime.ToShortTimeString());
+
 			yield return new WaitForSeconds(1);
 		}
 	}
@@ -66,15 +83,14 @@ public class GameManager : MonoBehaviour
 		try {
 			text = File.ReadAllText(string.Format("{0}/{1}", dataPath, filename));
 		} catch(Exception e) {
-			Debug.Log(e.Message);
+			Debug.LogException(e);
 		}
 		return new StringReader(text);
 	}
 
-	void LoadEnemyData()
+	void LoadEnemies()
 	{
-		StringReader input = GetDataInput("triggers.yml");
-		Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
+		StringReader input = GetDataInput("enemies.yml");
 		EnemyData[] enemyData = deserializer.Deserialize<EnemyData[]>(input);
 		foreach (EnemyData enemy in enemyData) {
 			Enemy enemyClone = (Enemy)Instantiate(baseEnemy);
@@ -84,10 +100,32 @@ public class GameManager : MonoBehaviour
 			enemies.Add(enemyClone);
 		}
 	}
+
+	void LoadQuests()
+	{
+		StringReader input = GetDataInput("quests.yml");
+		QuestData[] questData = deserializer.Deserialize<QuestData[]>(input);
+		foreach (QuestData quest in questData) {
+			Quest questClone = (Quest)Instantiate(baseQuest);
+			questClone.transform.parent = transform;
+			questClone.title = quest.Title;
+			questClone.description = quest.Description;
+			questClone.dueBy = quest.DueBy;
+			quests.Add(questClone);
+		}
+	}
 }
 
 class EnemyData
 {
 	public string Description { get; set; }
 	public int Severity { get; set; }
+}
+
+
+class QuestData
+{
+	public string Title { get; set; }
+	public string Description { get; set; }
+	public int DueBy { get; set; }
 }

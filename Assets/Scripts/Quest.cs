@@ -6,5 +6,5 @@ public class Quest : MonoBehaviour
 {
 	public string title;
 	public string description;
-	public string dueBy;
+	public int dueBy;
 }
