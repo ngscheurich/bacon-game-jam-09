@@ -25,11 +25,7 @@ public class GameManager : MonoBehaviour
 	public Text timeText;
 	public Text depthText;
 	public Text moraleText;
-	public GameObject rockPrefab;
 	public Artifact baseArtifact;
-  	public Vector2 levelSize = new Vector2(20f, 20f);
-	public Dictionary<Vector2, List<GameObject>> grid = new Dictionary<Vector2, List<GameObject>>();
-	public List<Vector2> gridPositions = new List<Vector2>();
 	public List<Artifact> artifacts = new List<Artifact>();
 
 	private string dataPath = "Assets/Data";
@@ -62,8 +58,6 @@ public class GameManager : MonoBehaviour
 	{
 		initializing = true;
 		player.gameObject.SetActive(false);
-		GenerateGrid();
-		// GenerateLevel();
 		LoadArtifacts();
 		initializing = false;
 	}
@@ -76,47 +70,6 @@ public class GameManager : MonoBehaviour
 		string moraleString = string.Format("Morale: {0}", morale.ToString());
 		moraleText.text = moraleString;
   	}
-
-	void GenerateGrid()
-	{
-		for (int y = 0; y < levelSize.y; y++) {
-			for (int x = 0; x < levelSize.x; x++) {
-				InstantiateObject(rockPrefab, new Vector2(x, y));
-				grid.Add(new Vector2(x, y), new List<GameObject>());
-			}
-		}
-	}
-
-	void GenerateLevel()
-	{
-		SpriteRenderer renderer = rockPrefab.GetComponent<SpriteRenderer>();
-		Vector2 spriteSize = new Vector2(renderer.bounds.extents.x * 2, renderer.bounds.extents.y * 2);
-		string text = "";
-		try {
-			text = File.ReadAllText(string.Format("{0}/{1}.txt", dataPath, "Level" + depth));
-			Vector2 currentPosition = new Vector2(0f, 0f);
-
-			foreach(char c in text) {
-				float nextX = currentPosition.x + 1;
-				float nextY = currentPosition.y;
-
-				string character = c.ToString();
-
-				if (character == "#") {
-					Vector2 spritePosition = new Vector2(currentPosition.x * spriteSize.x, currentPosition.y * spriteSize.y);
-					InstantiateObject(rockPrefab, spritePosition);
-				} else if (character == "\n" || character == "\r" || character == "\r\n") {
-					nextX = 0;
-					nextY = currentPosition.y - 1;
-				}
-
-				Vector2 nextPosition = new Vector2(nextX, nextY);
-				currentPosition = nextPosition;
-			}
-		} catch(Exception e) {
-			Debug.LogException(e);
-		}
-	}
 
 	void InstantiateObject(GameObject objekt, Vector2 position)
 	{

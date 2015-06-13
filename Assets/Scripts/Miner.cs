@@ -14,12 +14,22 @@ public class Miner : MonoBehaviour
 		
 		DontDestroyOnLoad(transform.gameObject);
 
-		transform.position = GameManager.instance.levelSize;	
+		transform.position = GridManager.instance.gridSize;
 
 		StartCoroutine(Move());
 	}
 
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Space)) {
 
+		}
+	}
+
+	void RemoveRock()
+	{
+
+	}
 
 	IEnumerator Move()
 	{
