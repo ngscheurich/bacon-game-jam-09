@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
 		initializing = true;
 		player.gameObject.SetActive(false);
 		LoadArtifacts();
+		LoadMiners();
+		LoadMiningEvents();
 		initializing = false;
 	}
 

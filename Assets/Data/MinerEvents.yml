@@ -1,0 +1,13 @@
+---
+-
+  description: >
+    The otherworldly breezes that intermittently blow
+    through the tunnels leave {0} on edge.
+  morale_loss: 20
+  chance: 10.0
+-
+  description: >
+    {0} thinks [pronoun] saw her shadow step away from
+    the light of [pronoun-possesive] the gas lamp.
+  morale_loss: 20
+  chance: 10.0

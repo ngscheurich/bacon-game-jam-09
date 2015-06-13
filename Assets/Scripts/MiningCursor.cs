@@ -18,8 +18,11 @@ public class MiningCursor : MonoBehaviour
 		
 		DontDestroyOnLoad(transform.gameObject);
 
+		gameManager = GameManager.instance;
 		gridManager = GridManager.instance;
-		transform.position = gridManager.gridSize;
+
+		Vector2 startPosition = new Vector2(0f, gridManager.gridSize.x - 1f);
+		transform.position = startPosition;
 
 		StartCoroutine(Move());
 	}
@@ -40,11 +43,15 @@ public class MiningCursor : MonoBehaviour
 				if (obj != null) {
 					if (obj.tag == "Rock") {
 						Destroy(obj);
-						int max = gameManager.miningEvents.Count;
-						MiningEvent miningEvent = gameManager.miningEvents[Random.Range(0, max)];
+						int miningEventIndex = Random.Range(0, gameManager.miningEvents.Count);
+						MiningEvent miningEvent = gameManager.miningEvents[miningEventIndex];
 						int miningEventChance = Random.Range(0, 11) * gameManager.depth;
 						if (miningEventChance >= miningEvent.Chance) {
-							Debug.Log(miningEvent.Description);
+							int minerIndex = Random.Range(0, gameManager.miners.Count);
+							Miner miner = gameManager.miners[minerIndex];
+							Debug.Log(string.Format(miningEvent.Description, miner.Name));
+						} else {
+							Debug.Log("Nothing happens...");
 						}
 					}
 				}
