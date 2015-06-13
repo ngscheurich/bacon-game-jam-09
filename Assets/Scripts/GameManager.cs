@@ -31,8 +31,8 @@ public class GameManager : MonoBehaviour
 	private List<Artifact> artifacts = new List<Artifact>();
 	private bool initializing;
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
-	private int levelWidth = 3;
-	private int levelHeight = 6;
+	private int levelWidth = 2;
+	private int levelHeight = 2;
 
 	void Awake()
 	{
@@ -72,35 +72,28 @@ public class GameManager : MonoBehaviour
 
 	void GenerateLevel()
 	{
-		SpriteRenderer sprintRenderer = wallPrefab.GetComponent<SpriteRenderer>();
-		Vector2 spriteSize = new Vector2(sprintRenderer.bounds.extents.x * 2, sprintRenderer.bounds.extents.y * 2);
+		SpriteRenderer sr = wallPrefab.GetComponent<SpriteRenderer>();
+		Vector2 spriteSize = new Vector2(sr.bounds.extents.x * 2, sr.bounds.extents.y * 2);
 		string text = "";
 		try {
 			text = File.ReadAllText(string.Format("{0}/{1}.txt", dataPath, "Level" + depth));
-			Vector2 currentGridPosition = new Vector2(0, 0);
-
+			Vector2 currentPosition = new Vector2(0f, 0f);
+			int count = 0;
 			foreach(char c in text) {
-				string msg = (c.ToString() == "#") ? "Found a wall!" : "Found empty space..."; 
-				Debug.Log(msg);
-			}
-
-			Vector2 currentPosition = new Vector2(0f, levelHeight);
-
-			foreach(char c in text) {
-				if (c.ToString() == "#") {
-					GameObject clone = (GameObject)Instantiate(wallPrefab);
-					clone.transform.parent = transform;
-					clone.transform.position = currentPosition;
-					Debug.Log(currentPosition);
+				count++;
+				string msg = "I have no idea what that is...";
+				if (c.ToString() == "#")
+					msg = "Found a wall!";
+				else if (c.ToString() == "-")
+					msg = "Found empty space..."; 
+				Debug.Log(count + " " + currentPosition + ": " + msg);
+				float nextX = currentPosition.x + 1;
+				float nextY = currentPosition.y;
+				if (currentPosition.x == levelWidth - 1) {
+					nextX = 0;
+					nextY = currentPosition.y + 1;
 				}
-
-				float nextX = (currentPosition.x == levelWidth) ? 0 : currentPosition.x + spriteSize.x;
-				float nextY = (currentPosition.x == levelWidth) ? currentPosition.y - spriteSize.y : currentPosition.y;
-
-
-
 				Vector2 nextPosition = new Vector2(nextX, nextY);
-
 				currentPosition = nextPosition;
 			}
 		} catch(Exception e) {
