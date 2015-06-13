@@ -118,7 +118,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -15}
+  m_AnchoredPosition: {x: 90, y: -17}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &75915357
@@ -141,10 +141,10 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 3
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Day 1 - 0
 --- !u!222 &75915358
@@ -340,7 +340,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -80, y: -15}
+  m_AnchoredPosition: {x: -90, y: -17}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &1560296491
@@ -709,6 +709,14 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 2009244371}
+    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
+      propertyPath: currentTime
+      value: 
+      objectReference: {fileID: 75915357}
+    - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
+      propertyPath: time
+      value: 1435
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
   m_IsPrefabParent: 0
