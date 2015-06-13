@@ -2,7 +2,21 @@
 -
   title: "Go To School"
   description: >
-    Gotta go to school today.
-  due_by_hour: 6
-  due_by_min: 30
-  valid_on_weekend: false
+    It's early, but you gotta go to school today.
+  start_time_hour: 6
+  start_time_min:  30
+  valid_days:
+    - monday
+    - wednesday
+    - thursday
+-
+  title: "Hang Out With Friends"
+  description: >
+    Your friends want to hang out, and you want to hang
+    out as well, and you wouldn't want them to worry...
+    I guess?
+  start_time_hour: 12
+  start_time_min:  00
+  valid_days:
+    - saturday
+    - sunday

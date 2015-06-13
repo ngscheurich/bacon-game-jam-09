@@ -96,27 +96,44 @@ public class GameManager : MonoBehaviour
 	void LoadEnemies()
 	{
 		StringReader input = GetDataInput("enemies.yml");
-		EnemyData[] enemyData = deserializer.Deserialize<EnemyData[]>(input);
-		foreach (EnemyData enemy in enemyData) {
-			Enemy enemyClone = (Enemy)Instantiate(baseEnemy);
-			enemyClone.transform.parent = transform;
-			enemyClone.description = enemy.Description;
-			enemyClone.severity = enemy.Severity;
-			enemies.Add(enemyClone);
+
+		try {
+			EnemyData[] enemyData = deserializer.Deserialize<EnemyData[]>(input);
+
+			foreach (EnemyData enemy in enemyData) {
+				Enemy enemyClone = (Enemy)Instantiate(baseEnemy);
+
+				enemyClone.transform.parent = transform;
+				enemyClone.description = enemy.Description;
+				enemyClone.severity = enemy.Severity;
+
+				enemies.Add(enemyClone);
+			}
+		} catch(Exception e) {
+			Debug.LogException(e);
 		}
 	}
 
 	void LoadQuests()
 	{
 		StringReader input = GetDataInput("quests.yml");
-		QuestData[] questData = deserializer.Deserialize<QuestData[]>(input);
-		foreach (QuestData quest in questData) {
-			Quest questClone = (Quest)Instantiate(baseQuest);
-			questClone.transform.parent = transform;
-			questClone.title = quest.Title;
-			questClone.description = quest.Description;
-			questClone.dueByTimeSpan = new TimeSpan(quest.DueByHour, quest.DueByMin, 0);
-			quests.Add(questClone);
+
+		try {
+			QuestData[] questData = deserializer.Deserialize<QuestData[]>(input);
+
+			foreach (QuestData quest in questData) {
+				Quest questClone = (Quest)Instantiate(baseQuest);
+
+				questClone.transform.parent = transform;
+				questClone.title = quest.Title;
+				questClone.description = quest.Description;
+				questClone.startTimeSpan = new TimeSpan(quest.StartTimeHour, quest.StartTimeMin, 0);
+
+
+				quests.Add(questClone);
+			}
+		} catch(Exception e) {
+			Debug.LogException(e);
 		}
 	}
 }
@@ -132,6 +149,7 @@ class QuestData
 {
 	public string Title { get; set; }
 	public string Description { get; set; }
-	public int DueByHour { get; set; }
-	public int DueByMin { get; set; }
+	public int StartTimeHour { get; set; }
+	public int StartTimeMin { get; set; }
+	public string[] ValidDays { get; set; }
 }

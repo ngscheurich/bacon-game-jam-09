@@ -6,13 +6,23 @@ public class Quest : MonoBehaviour
 {
 	public string title;
 	public string description;
-	public string dueBy;
+	public string startTime;
 	public int duration;
-	public TimeSpan dueByTimeSpan;
-	public bool validOnWeekend;
+	public TimeSpan startTimeSpan;
+	[Serializable]
+	public struct ValidDays {
+		public bool sunday;
+		public bool monday;
+		public bool tuesday;
+		public bool wednesday;
+		public bool thursday;
+		public bool friday;
+		public bool saturday;
+	}
+	public ValidDays validDays;
 
 	void Awake()
 	{
-		dueBy = dueByTimeSpan.ToString();
+		startTime = startTimeSpan.ToString();
 	}
 }
