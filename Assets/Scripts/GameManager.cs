@@ -31,8 +31,8 @@ public class GameManager : MonoBehaviour
 	private List<Artifact> artifacts = new List<Artifact>();
 	private bool initializing;
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
-	private int levelWidth = 80;
-	private int levelHeight = 11;
+	private int levelWidth = 10;
+	private int levelHeight = 10;
 
 	void Awake()
 	{
@@ -75,17 +75,20 @@ public class GameManager : MonoBehaviour
 		string text = "";
 		try {
 			text = File.ReadAllText(string.Format("{0}/{1}.txt", dataPath, "Level" + depth));
-			Vector2 currentPos;
+			Vector2 currentPosition = new Vector2(0f, levelHeight);
 
 			foreach(char c in text) {
-				currentPos = new Vector2(0, levelHeight);
 				if (c.ToString() == "#") {
 					GameObject clone = (GameObject)Instantiate(wallPrefab);
 					clone.transform.parent = transform;
-					clone.transform = currentPos;
+					clone.transform.position = currentPosition;
 				}
-				Vector2 newPos = new Vector2(currentPos.x + 1, currentPos.y + 1);
-				currentPos = newPos;
+
+				float nextX = (currentPosition.x == levelWidth) ? 0 : currentPosition.x + 1;
+				float nextY = (currentPosition.x == levelWidth) ? currentPosition.y + 1 : currentPosition.y;
+
+				Vector2 nextPosition = new Vector2(nextX, nextY);
+				currentPosition = nextPosition;
 			}
 		} catch(Exception e) {
 			Debug.LogException(e);
