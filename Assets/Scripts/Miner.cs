@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Miner : MonoBehaviour
 {
 	public static Miner instance = null;
+
+	private GridManager gridManager;
 
 	void Awake()
 	{
@@ -14,7 +17,8 @@ public class Miner : MonoBehaviour
 		
 		DontDestroyOnLoad(transform.gameObject);
 
-		transform.position = GridManager.instance.gridSize;
+		gridManager = GridManager.instance;
+		transform.position = gridManager.gridSize;
 
 		StartCoroutine(Move());
 	}
@@ -22,13 +26,19 @@ public class Miner : MonoBehaviour
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Space)) {
-
+			RemoveRock();
 		}
 	}
 
 	void RemoveRock()
 	{
-
+		Vector2 key = transform.position;
+		if (gridManager.grid.ContainsKey(key)) {
+			List<GameObject> objects = gridManager.grid[key];
+			foreach (GameObject obj in objects) {
+				if (obj.tag == "Rock") Destroy(obj);
+			}
+		}
 	}
 
 	IEnumerator Move()

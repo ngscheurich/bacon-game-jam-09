@@ -6,10 +6,12 @@ public class GridManager : MonoBehaviour
 {
 	public static GridManager instance = null;
 
-	public GameObject rockPrefab;
 	public Vector2 gridSize = new Vector2(20f, 20f);
 	public Dictionary<Vector2, List<GameObject>> grid = new Dictionary<Vector2, List<GameObject>>();
 	public List<Vector2> gridPositions = new List<Vector2>();
+
+	public GameObject rockPrefab;
+	public GameObject pebblePrefab;
 
 	void Awake()
 	{
@@ -41,7 +43,7 @@ public class GridManager : MonoBehaviour
 			var list = grid[key];
 			list.Add(obj);
 			grid[key] = list;
-			obj.transform.parent = transform.parent;
+			obj.transform.parent = transform;
 			obj.transform.position = key;
 		} else {
 			Debug.Log("Not a valid grid key");
