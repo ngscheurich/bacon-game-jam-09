@@ -22,6 +22,8 @@ public class GridManager : Activatable
 			DestroyObject(this);
 		
 		DontDestroyOnLoad(transform.gameObject);
+
+		Reload();
 	}
 
 	public override void Activate()

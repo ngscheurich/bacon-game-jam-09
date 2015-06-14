@@ -39,9 +39,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b213dc781704eebaf72be35872ba7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rockPrefab: {fileID: 0}
-  gridSize: {x: 20, y: 20}
-  gridPositions: []
+  gridSize: {x: 5, y: 5}
+  stonePrefab: {fileID: 170046, guid: 2ef543996666540f7a9aac9756a61f44, type: 2}
+  entrancePrefab: {fileID: 197120, guid: 8b7dbbbbad82d4f5db68ae91c6352183, type: 2}
+  entrance: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

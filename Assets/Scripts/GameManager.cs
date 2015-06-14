@@ -58,13 +58,10 @@ public class GameManager : MonoBehaviour
 	void InitializeGame()
 	{
 		initializing = true;
-		player.gameObject.SetActive(false);
 		LoadArtifacts();
 		LoadMiners();
 		LoadMiningEvents();
 		RecruitMiners();
-		mode = Modes.Mine;
-		SwitchMode();
 		initializing = false;
 	}
 
@@ -86,19 +83,6 @@ public class GameManager : MonoBehaviour
 		GameObject clone = (GameObject)Instantiate(objekt);
 		clone.transform.parent = transform;
 		clone.transform.position = position;
-	}
-
-	void SwitchMode()
-	{
-		if (mode == Modes.Mine) {
-			GridManager.instance.Activate();
-			MiningCursor.instance.Activate();
-		} else if (mode == Modes.Explore) {
-			GridManager.instance.Deactivate();
-			MiningCursor.instance.Deactivate();
-		} else {
-
-		}
 	}
 
 	void RecruitMiners()
