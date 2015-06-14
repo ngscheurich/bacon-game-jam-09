@@ -5,36 +5,29 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 
 public class ExploreManager : MonoBehaviour
 {
-	public GameObject wallPrefab;
+	public GameObject player;
+	public GameObject wall;
 
 	private string dataPath = "Assets/Data";
-	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
 	private GameManager gameManager;
-
-	public struct LevelCharacters
-	{
-		public string wall;
-		public List<string> newLines = new List<string>();
-
-		public LevelCharacters()
-		{
-			wall = "#";
-			newLines.Add("\n");
-			newLines.Add("\r");
-			newLines.Add("\r\n");
-		}
-	}
-
-	private LevelCharacters levelCharacters = new LevelCharacters();
+	private Dictionary<string, GameObject> charMap = new Dictionary<string, GameObject>();
+	private List<string> newLineChars = new List<string>();
 
 	void Awake()
 	{
 		gameManager = GameManager.instance;
+
+		charMap.Add("#", wall);
+		charMap.Add("P", player);
+
+		newLineChars.Add("\n");
+		newLineChars.Add("\r");
+		newLineChars.Add("\r\n");
+
+		GenerateLevel();
 	}
 
 	void GenerateLevel()
@@ -50,9 +43,9 @@ public class ExploreManager : MonoBehaviour
 				
 				string character = c.ToString();
 				
-				if (character == levelCharacters.wall) {
-					InstantiateObject(wallPrefab, currentPosition);
-				} else if (levelCharacters.newLines.Contains(character)) {
+				if (charMap.ContainsKey(character)) {
+					Instantiate(charMap[character], currentPosition, Quaternion.identity);
+				} else if (newLineChars.Contains(character)) {
 					nextX = 0;
 					nextY = currentPosition.y - 1;
 				}

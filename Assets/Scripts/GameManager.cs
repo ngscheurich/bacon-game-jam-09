@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
 	
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
 	private string dataPath = "Assets/Data";
-
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
 	private bool initializing;
 
