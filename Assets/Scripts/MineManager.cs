@@ -10,6 +10,7 @@ public class MineManager : Activatable
 	public GameObject stonePrefab;
 	public GameObject entrancePrefab;
 	public GameObject entrance;
+	public bool entranceLocated;
 	public Text dateText;
 	public Text timeText;
 	public Text depthText;
@@ -54,16 +55,10 @@ public class MineManager : Activatable
 
 		dateText.text = string.Format(gameManager.currentDateTime.ToString("MMM d, yyyy"));
 		timeText.text = gameManager.currentDateTime.ToShortTimeString();
-	}
 
-	public void FlashEnterText(bool on)
-	{
-		if (on)
-			StartCoroutine(FlashText(enterText, 0.5f));
-		else
-			StopCoroutine("FlashText");
+		if (entranceLocated) StartCoroutine(FlashText(enterText, 1f));
 	}
-
+	
 	void GenerateGrid()
 	{
 		for (int y = 0; y < gridSize.y; y++) {
