@@ -44,12 +44,12 @@ public class MiningCursor : MonoBehaviour
 
 						if (objects.Contains(mineManager.entrance)) {
 							GameManager.instance.entranceLocated = true;
-							outcome = "{name} has located the entrance!";
+							outcome = "{name} has located the artifact!";
 							mineManager.entranceLocated = true;
 							StartCoroutine(mineManager.FlashText(mineManager.enterText, 1f));
 						} else if (eventChance <= miningEvent.Chance) {
 							outcome = miningEvent.Description;
-							miner.AdjustMorale(-miningEvent.Terror);
+							miner.LoseMorale(miningEvent.Terror);
 						}
 
 						string message = PersonalizeMessage(miner, outcome);

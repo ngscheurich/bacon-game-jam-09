@@ -8,7 +8,7 @@
   chance: 9.0
 -
   description: >
-    {name} begins to notice gibbering voices in {his/her}
+    {name} begins to hear gibbering voices in {his/her}
     head, urging {him/her} deeper, deeper, ever deeper...
   terror: 2
   chance: 8.0

@@ -345,7 +345,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
       propertyPath: minerMorale
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
@@ -582,13 +582,18 @@ MonoBehaviour:
   m_Text: 'Dec 3, 1892
 
 
-    It has been only six days since you receieved the telegram. The sender: Professor
+    It has been only six days since you receieved that fateful telegram from Professor
     Irene Benton of Miskatonic University, who you are lucky to call a good friend
-    as well as an esteemed colleague. The message: Benton has uncovered clues leading
-    her to believe there is a cache of long-forgotten artifacts blah blah...
+    as well as an esteemed colleague. It seems Benton has uncovered clues leading
+    her to believe there is a cache of antediluvian artifacts hidden far below the
+    earth at the location of a  Nepalese village.
 
 
-    Press Return to continue...'
+    Upon arriving at the dig site, you find a team of explorers--archaeologists, antiquarians,
+    and village residents-- at your disposal.
+
+
+    Press Return to begin digging...'
 --- !u!222 &1719836866
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class GameOverManager : MonoBehaviour{
 		gameOverText = GameObject.Find("GameOverText").GetComponent<Text>();
 
 		string outro = "GAME OVER\n=========\n\n";
-		outro += string.Format("You delved {0}00 ft into the Earth.\n\n", gameManager.depth.ToString());
+		outro += string.Format("You reached a depth of {0}00 ft.\n\n", gameManager.depth.ToString());
 
 		foreach (Miner miner in gameManager.miners) {
 			outro += string.Format("{0} went mad on {1}.\n", miner.Name, miner.whenWentInsane.ToString("MMM d, yyyy"));

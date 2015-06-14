@@ -170,7 +170,7 @@ public class Miner
 		float loss = (amount > morale) ? morale : amount;
 		morale -= loss;
 		GameManager.instance.morale -= loss;
-		if (morale = 0)
+		if (morale == 0)
 			BecomeInsane();
 	}
 
