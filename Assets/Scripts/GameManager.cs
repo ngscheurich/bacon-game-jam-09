@@ -165,15 +165,13 @@ public class Miner
 	public bool insane;
 	public DateTime whenWentInsane;
 
-	public void AdjustMorale(float amount)
+	public void LoseMorale(float amount)
 	{
-		float moraleDelta = morale + amount;
-		if (moraleDelta <= 0)
+		float loss = (amount > morale) ? morale : amount;
+		morale -= loss;
+		GameManager.instance.morale -= loss;
+		if (morale = 0)
 			BecomeInsane();
-		else
-			morale += amount;
-		float totalMoraleAdjustment = (moraleDelta < 0) ? morale : amount;
-		GameManager.instance.morale += totalMoraleAdjustment;
 	}
 
 	public void BecomeInsane()

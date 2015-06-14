@@ -5,17 +5,41 @@
     from the glow of {his/her} gas lamp. No, must've just
     been a trick of the light...
   terror: 1
+  chance: 9.0
+-
+  description: >
+    {name} begins to notice gibbering voices in {his/her}
+    head, urging {him/her} deeper, deeper, ever deeper...
+  terror: 2
   chance: 8.0
+-
+  description: >
+    The otherworldly breezes that intermittently blow
+    through these dank tunnels leave {name} on edge. What
+    could the source of such things be this far under
+    ground?
+  terror: 3
+  chance: 7.0
+-
+  description: >
+    {name} discovers some unutterable phrases scrawled onto
+    the stone walls, glowing iridescent in the darkness. No
+    one else seems to be able to see them.
+  terror: 4
+  chance: 6.0
 -
   description: >
     Strange, not-too-distant sounds like the scraping of
     some nightmarish carapace on the stone cause {name} to
     lose a bit of {his/her} resolve.
-  terror: 3
+  terror: 5
   chance: 5.0
 -
   description: >
-    The otherworldly breezes that intermittently blow
-    through the tunnels leave {name} on edge.
-  terror: 5
+    While alone in a tunnel, {name} is visited by an
+    spectral being. It lurks in the darkness, emitting a
+    foetid odor. Its body only comes into view in brief
+    glimpses, all tentacles and hideous amorphous
+    appendages.
+  terror: 20
   chance: 1.0
