@@ -40,8 +40,8 @@ public class GridManager : MonoBehaviour
 	
 	public void AddEntrance()
 	{
-		float x = Mathf.Floor(Random.Range(0, gridSize.x));
-		float y = Mathf.Floor(Random.Range(0, gridSize.y));
+		float x = Mathf.Round(Random.Range(0, gridSize.x));
+		float y = Mathf.Round(Random.Range(0, gridSize.y));
 		Vector2 position = new Vector2(x, y);
 		entrance = Instantiate(entrancePrefab);
 		AddToGrid(position, entrance);

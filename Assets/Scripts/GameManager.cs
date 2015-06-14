@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 	public int currentDay = 1;
 	public float timeFactor = 8;
 	public int depth = 1;
-	public int morale = 0;
+	public float morale = 0f;
 	public int minerCount = 5;
 	public int minerMorale = 20;
 	public enum Phases { Mining, Exploring }
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
 	private DateTime currentDateTime;
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
-	private int maxMorale;
+	private float maxMorale;
 	private bool initializing;
 
 	void Awake()
@@ -76,7 +76,8 @@ public class GameManager : MonoBehaviour
 		depthText.text = depthString;
 
 		maxMorale = miners.Count * minerMorale;
-		string moraleString = string.Format("Morale: {0}/{1}", morale.ToString(), maxMorale.ToString());
+		float moralePercent = Mathf.Round(morale / maxMorale * 100);
+		string moraleString = string.Format("Morale: {0}%", moralePercent);
 		moraleText.text = moraleString;
   	}
 
