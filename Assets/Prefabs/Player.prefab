@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  jumpPower: 10
+  jumpPower: 300
   grounded: 0
   rb2d: {fileID: 0}
 --- !u!212 &21277432

@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 	public float jumpPower = 30f;
 	public bool grounded;
 	public Rigidbody2D rb2d;
+	public float groundCheckTolerance = .01f;
 
 	void Start()
 	{
@@ -19,12 +20,16 @@ public class Player : MonoBehaviour
 	{
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
 		if (hit.collider != null) {
-			float distanceFromGround = hit.point.y - transform.position.y;
-			Debug.Log(hit.collider.gameObject.name);
+			float hitPointY = hit.point.y;
+			float playerBottom = transform.position.y + (transform.localScale.y / 2);
+			float distanceFromGround = hitPointY - playerBottom;
 			Debug.Log(distanceFromGround);
+			if (distanceFromGround < groundCheckTolerance) {
+				Debug.Log("grounded");
+			}
 		}
 
-		if (Input.GetKey(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space))
 			rb2d.AddForce(Vector2.up * jumpPower);
 	}
 }
