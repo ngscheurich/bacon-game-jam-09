@@ -11,6 +11,7 @@ public class GridManager : MonoBehaviour
 
 	public GameObject rockPrefab;
 	public GameObject entrancePrefab;
+	public GameObject entrance;
 
 	void Awake()
 	{
@@ -42,7 +43,7 @@ public class GridManager : MonoBehaviour
 		float x = Mathf.Floor(Random.Range(0, gridSize.x));
 		float y = Mathf.Floor(Random.Range(0, gridSize.y));
 		Vector2 position = new Vector2(x, y);
-		GameObject entrance = Instantiate(entrancePrefab);
+		entrance = Instantiate(entrancePrefab);
 		AddToGrid(position, entrance);
 	}
 

@@ -843,19 +843,18 @@ Prefab:
     - target: {fileID: 11431366, guid: 287fe6ffb44e14a269904854c9e28041, type: 2}
       propertyPath: entrance
       value: 
-      objectReference: {fileID: 11401722, guid: 8b7dbbbbad82d4f5db68ae91c6352183,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 11431366, guid: 287fe6ffb44e14a269904854c9e28041, type: 2}
       propertyPath: entrancePrefab
       value: 
       objectReference: {fileID: 197120, guid: 8b7dbbbbad82d4f5db68ae91c6352183, type: 2}
     - target: {fileID: 11431366, guid: 287fe6ffb44e14a269904854c9e28041, type: 2}
       propertyPath: gridSize.x
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11431366, guid: 287fe6ffb44e14a269904854c9e28041, type: 2}
       propertyPath: gridSize.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 287fe6ffb44e14a269904854c9e28041, type: 2}

@@ -21,11 +21,11 @@ public class MiningCursor : MonoBehaviour
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Space)) {
-			BreakRock();
+			Mine();
 		}
 	}
 
-	void BreakRock()
+	void Mine()
 	{
 		Vector2 key = transform.position;
 		if (gridManager.grid.ContainsKey(key)) {
@@ -33,27 +33,35 @@ public class MiningCursor : MonoBehaviour
 			foreach (GameObject obj in objects) {
 				if (obj != null) {
 					if (obj.tag == "Rock") {
-						Destroy(obj);
+						int minerIndex = Random.Range(0, gameManager.miners.Count);
+						Miner miner = gameManager.miners[minerIndex];
+
 						int eventIndex = Random.Range(0, gameManager.miningEvents.Count);
 						MiningEvent miningEvent = gameManager.miningEvents[eventIndex];
 						int eventChance = Random.Range(0, 11) * gameManager.depth;
-						if (eventChance <= miningEvent.Chance) {
-							int minerIndex = Random.Range(0, gameManager.miners.Count);
-							Miner miner = gameManager.miners[minerIndex];
-							string description = PersonalizeDescription(miner, miningEvent.Description);
-							description += string.Format(" -{0} morale.", miningEvent.Terror);
+
+						Destroy(obj);
+
+						string outcome = "Nothing happens...";
+
+						if (objects.Contains(gridManager.entrance)) {
+							gameManager.entranceLocated = true;
+							outcome = "{name} has located the entrance!";
+						} else if (eventChance <= miningEvent.Chance) {
+							outcome = miningEvent.Description;
+							outcome += string.Format(" -{0} morale.", miningEvent.Terror);
 							miner.AdjustMorale(-miningEvent.Terror);
-							Debug.Log(description);
-						} else {
-							Debug.Log("Nothing happens...");
 						}
+
+						string message = PersonalizeMessage(miner, outcome);
+						Debug.Log(message);
 					}
 				}
 			}
 		}
 	}
 
-	string PersonalizeDescription(Miner miner, string description)
+	string PersonalizeMessage(Miner miner, string description)
 	{
 		description = description.Replace("{name}", miner.Name);
 		if (miner.Gender == "male") {
