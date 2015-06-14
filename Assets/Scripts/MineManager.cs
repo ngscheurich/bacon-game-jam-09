@@ -28,7 +28,9 @@ public class MineManager : Activatable
 		depthText  = GameObject.Find("DepthText").GetComponent<Text>();
 		moraleText = GameObject.Find("MoraleText").GetComponent<Text>();
 		eventText  = GameObject.Find("EventText").GetComponent<Text>();
-		
+
+		eventText.text = "";
+
 		gameManager.depth++;
 
 		grid.Clear();
