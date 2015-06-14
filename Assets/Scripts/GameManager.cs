@@ -93,13 +93,7 @@ public class GameManager : MonoBehaviour
 	void SwitchMode()
 	{
 		if (mode == Modes.Mine) {
-			if (!GridManager.instance.gameObject.activeSelf)
-				GridManager.instance.gameObject.SetActive(true);
-
-			if (!MiningCursor.instance.gameObject.activeSelf)
-				MiningCursor.instance.gameObject.SetActive(true);
-
-			GridManager.instance.NewGrid();
+			GridManager.instance.Activate();
 		} else if (mode == Modes.Explore) {
 
 		} else {

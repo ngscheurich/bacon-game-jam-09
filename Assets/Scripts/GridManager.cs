@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GridManager : MonoBehaviour
+public class GridManager : Singleton
 {
 	public static GridManager instance = null;
 
@@ -13,15 +13,11 @@ public class GridManager : MonoBehaviour
 	public GameObject stonePrefab;
 	public GameObject entrancePrefab;
 	public GameObject entrance;
-
-	void Awake()
+	
+	public virtual void Activate()
 	{
-		if (instance == null)
-			instance = this;
-		else if (instance != this)
-			DestroyObject(this);
-		
-		DontDestroyOnLoad(transform.gameObject);
+		NewGrid();
+		base.Activate();
 	}
 
 	public void NewGrid()

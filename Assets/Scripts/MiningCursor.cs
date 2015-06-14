@@ -2,29 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MiningCursor : MonoBehaviour
+public class MiningCursor : Singleton
 {
 	public static MiningCursor instance = null;
 
 	private GameManager gameManager;
   	private GridManager gridManager;
 
-	void Awake()
+	protected virtual void Awake()
 	{
-		if (instance == null)
-			instance = this;
-		else if (instance != this)
-			DestroyObject(this);
-		
-		DontDestroyOnLoad(transform.gameObject);
-
 		gameManager = GameManager.instance;
 		gridManager = GridManager.instance;
 
-		Vector2 startPosition = new Vector2(0f, gridManager.gridSize.x - 1f);
-		transform.position = startPosition;
-
 		StartCoroutine(Move());
+
+		base.Awake();
 	}
 
 	void Update()
@@ -32,6 +24,12 @@ public class MiningCursor : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			Mine();
 		}
+	}
+
+	void Reload()
+	{
+		Vector2 startPosition = new Vector2(0f, gridManager.gridSize.x - 1f);
+		transform.position = startPosition;
 	}
 
 	void Mine()
