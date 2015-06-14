@@ -19,7 +19,11 @@ public class GameManager : MonoBehaviour
 	public float morale;
 	public int minerCount = 5;
 	public int minerMorale = 20;
-	public enum Modes { Mine, Explore }
+	public enum Modes
+	{
+		Mine,
+		Explore
+	}
 	public Modes mode = Modes.Mine;
 	public Player player;
 	public List<Artifact> artifacts = new List<Artifact>();
@@ -63,8 +67,12 @@ public class GameManager : MonoBehaviour
 
 	void Update()
 	{
-		if (initializing) return;
-  	}
+		if (initializing)
+			return;
+
+		if (miners.Count == 0)
+			Application.LoadLevel("GameOver");
+	}
 
 	void InstantiateObject(GameObject objekt, Vector2 position)
 	{
@@ -106,7 +114,7 @@ public class GameManager : MonoBehaviour
 		string text = "";
 		try {
 			text = File.ReadAllText(string.Format("{0}/{1}.yml", dataPath, filename));
-		} catch(Exception e) {
+		} catch (Exception e) {
 			Debug.LogException(e);
 		}
 		return new StringReader(text);
@@ -121,7 +129,7 @@ public class GameManager : MonoBehaviour
 			foreach (Artifact artifact in artifactData) {
 				artifacts.Add(artifact);
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			Debug.LogException(e);
 		}
 	}
@@ -135,7 +143,7 @@ public class GameManager : MonoBehaviour
 			foreach (Miner miner in minerData) {
 				allMiners.Add(miner);
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			Debug.LogException(e);
 		}
 	}
@@ -149,9 +157,9 @@ public class GameManager : MonoBehaviour
 			foreach (MiningEvent miningEvent in miningEventData) {
 				miningEvents.Add(miningEvent);
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			Debug.LogException(e);
-    	}
+		}
 	}
 }
 
@@ -173,14 +181,15 @@ public class Miner
 		if (moraleDelta <= 0)
 			BecomeInsane();
 		else
-			morale+= amount;
+			morale += amount;
 		int totalMoraleAdjustment = (moraleDelta < 0) ? morale : amount;
-		GameManager.instance.morale+= totalMoraleAdjustment;
+		GameManager.instance.morale += totalMoraleAdjustment;
 	}
 
 	public void BecomeInsane()
 	{
-
+		Debug.Log(string.Format("{0} has gone CRAZY!!", Name));
+		GameManager.instance.miners.Remove(this);
 	}
 }
 
