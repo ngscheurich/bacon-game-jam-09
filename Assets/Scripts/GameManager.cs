@@ -29,8 +29,9 @@ public class GameManager : MonoBehaviour
 	public bool entranceLocated;
 	public DateTime currentDateTime;
 	
-	private string dataPath = "Assets/Data";
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
+	private string dataPath = "Assets/Data";
+
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
 	private bool initializing;
 
@@ -42,10 +43,6 @@ public class GameManager : MonoBehaviour
 			DestroyObject(this);
 
 		DontDestroyOnLoad(transform.gameObject);
-	}
-
-	void OnLevelWasLoaded(int level)
-	{
 	}
 
 	void Start()

@@ -17,8 +17,7 @@ public class MineManager : MonoBehaviour
 	public Text moraleText;
 	public Text enterText;
 	public Text eventText;
-
-
+	
 	private GameManager gameManager;
 
 	void Awake()
