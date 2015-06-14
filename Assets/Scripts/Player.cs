@@ -5,11 +5,11 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-	public float speed = 10f;
-	public float jumpPower = 30f;
+	public float speed = 30f;
+	public float jumpPower = 300f;
 	public bool grounded;
 	public Rigidbody2D rb2d;
-	public float groundCheckTolerance = .01f;
+	public float groundCheckTolerance = .015f;
 
 	void Start()
 	{
@@ -22,14 +22,20 @@ public class Player : MonoBehaviour
 		if (hit.collider != null) {
 			float hitPointY = hit.point.y;
 			float playerBottom = transform.position.y + (transform.localScale.y / 2);
-			float distanceFromGround = hitPointY - playerBottom;
-			Debug.Log(distanceFromGround);
-			if (distanceFromGround < groundCheckTolerance) {
-				Debug.Log("grounded");
-			}
+			float distanceFromGround = Mathf.Abs(playerBottom - hitPointY - 1);
+			grounded = (distanceFromGround < groundCheckTolerance) ? true : false;
 		}
 
-		if (Input.GetKeyDown(KeyCode.Space))
-			rb2d.AddForce(Vector2.up * jumpPower);
+		if (grounded) {
+			if (Input.GetKeyDown(KeyCode.Space))
+				rb2d.AddForce(Vector2.up * jumpPower);
+
+			Vector2 sideForce = Vector2.zero;
+			if (Input.GetKey(KeyCode.RightArrow))
+				sideForce.x = 1;
+			else if (Input.GetKey(KeyCode.LeftArrow))
+				sideForce.x = -1;
+			rb2d.AddForce(sideForce * speed);
+		}
 	}
 }
