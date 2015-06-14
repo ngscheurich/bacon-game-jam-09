@@ -41,6 +41,7 @@ public class MiningCursor : Activatable
 						if (objects.Contains(mineManager.entrance)) {
 							GameManager.instance.entranceLocated = true;
 							outcome = "{name} has located the entrance!";
+							mineManager.FlashEnterText(true);
 						} else if (eventChance <= miningEvent.Chance) {
 							outcome = miningEvent.Description;
 							// outcome += string.Format(" -{0} morale.", miningEvent.Terror);

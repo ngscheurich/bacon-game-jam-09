@@ -14,6 +14,7 @@ public class MineManager : Activatable
 	public Text timeText;
 	public Text depthText;
 	public Text moraleText;
+	public Text enterText;
 	public Text eventText;
 
 
@@ -27,8 +28,10 @@ public class MineManager : Activatable
 		timeText   = GameObject.Find("TimeText").GetComponent<Text>();
 		depthText  = GameObject.Find("DepthText").GetComponent<Text>();
 		moraleText = GameObject.Find("MoraleText").GetComponent<Text>();
+		enterText  = GameObject.Find("EnterText").GetComponent<Text>();
 		eventText  = GameObject.Find("EventText").GetComponent<Text>();
 
+		enterText.enabled = false;
 		eventText.text = "";
 
 		gameManager.depth++;
@@ -51,6 +54,14 @@ public class MineManager : Activatable
 
 		dateText.text = string.Format(gameManager.currentDateTime.ToString("MMM d, yyyy"));
 		timeText.text = gameManager.currentDateTime.ToShortTimeString();
+	}
+
+	public void FlashEnterText(bool on)
+	{
+		if (on)
+			StartCoroutine(FlashText(enterText, 0.5f));
+		else
+			StopCoroutine("FlashText");
 	}
 
 	void GenerateGrid()
@@ -93,4 +104,12 @@ public class MineManager : Activatable
 			Debug.LogError(string.Format("{0} is not a valid grid key", key));
 		}
 	}
+
+	IEnumerator FlashText(Text text, float interval)
+	{
+		while (true) {
+			text.enabled = !text.enabled;
+			yield return new WaitForSeconds(interval);
+		}
+  	}
 }
