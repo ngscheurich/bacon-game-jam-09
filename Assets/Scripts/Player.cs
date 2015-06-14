@@ -6,7 +6,7 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
 	public float speed = 10f;
-	public float jumpPower = 10f;
+	public float jumpPower = 30f;
 	public bool grounded;
 	public Rigidbody2D rb2d;
 
@@ -20,6 +20,11 @@ public class Player : MonoBehaviour
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
 		if (hit.collider != null) {
 			float distanceFromGround = hit.point.y - transform.position.y;
+			Debug.Log(hit.collider.gameObject.name);
+			Debug.Log(distanceFromGround);
 		}
+
+		if (Input.GetKey(KeyCode.Space))
+			rb2d.AddForce(Vector2.up * jumpPower);
 	}
 }

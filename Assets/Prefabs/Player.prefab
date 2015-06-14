@@ -12,7 +12,7 @@ GameObject:
   - 50: {fileID: 5036580}
   - 61: {fileID: 6116894}
   - 212: {fileID: 21277432}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,11 +70,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2011d0e8b0294c2a8428e0055a09f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sanity: 100
-  health: 100
-  fatigue: 10
   speed: 10
-  fatigueFactor: 1
+  jumpPower: 10
+  grounded: 0
+  rb2d: {fileID: 0}
 --- !u!212 &21277432
 SpriteRenderer:
   m_ObjectHideFlags: 1

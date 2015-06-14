@@ -42,7 +42,7 @@ MonoBehaviour:
   hud: {fileID: 0}
   currentDay: 1
   timeFactor: 8
-  depth: 0
+  depth: 1
   morale: 0
   minerCount: 5
   minerMorale: 20
