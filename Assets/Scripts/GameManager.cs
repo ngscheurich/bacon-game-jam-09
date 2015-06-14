@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
 			MiningCursor.instance.Activate();
 		} else if (mode == Modes.Explore) {
 			GridManager.instance.Deactivate();
-			// MiningCursor.instance.Deactivate();
+			MiningCursor.instance.Deactivate();
 		} else {
 
 		}

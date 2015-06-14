@@ -24,13 +24,13 @@ public class GridManager : Activatable
 		DontDestroyOnLoad(transform.gameObject);
 	}
 
-	public virtual void Activate()
+	public override void Activate()
 	{
-		NewGrid();
+		Reload();
 		base.Activate();
 	}
 
-	public void NewGrid()
+	public void Reload()
 	{
 		grid.Clear();
 		GenerateGrid();

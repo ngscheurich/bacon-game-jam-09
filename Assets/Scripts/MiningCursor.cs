@@ -24,6 +24,13 @@ public class MiningCursor : Activatable
 		StartCoroutine(Move());
 	}
 
+	public override void Activate()
+	{
+		Reload();
+		base.Activate();
+	}
+
+
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Space)) {
