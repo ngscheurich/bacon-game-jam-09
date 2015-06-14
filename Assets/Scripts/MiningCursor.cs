@@ -36,7 +36,7 @@ public class MiningCursor : Activatable
 
 						Destroy(obj);
 
-						string outcome = "Nothing happens...";
+						string outcome = "";
 
 						if (objects.Contains(mineManager.entrance)) {
 							GameManager.instance.entranceLocated = true;
@@ -76,7 +76,8 @@ public class MiningCursor : Activatable
 	IEnumerator Move()
 	{
 		while (true) {
-			Vector2 newPosition = transform.position;
+			Vector2 currentPosition = transform.position;
+			Vector2 newPosition = currentPosition;
 			if (Input.GetKey(KeyCode.RightArrow))
 				newPosition.x = newPosition.x + 1;
 			else if (Input.GetKey(KeyCode.LeftArrow))
@@ -86,8 +87,8 @@ public class MiningCursor : Activatable
 			else if (Input.GetKey(KeyCode.DownArrow))
 				newPosition.y = newPosition.y - 1;
 
-			if (mineManager.grid.ContainsKey(newPosition)) {
-				// mineManager.eventText.text = "";
+			if (newPosition != currentPosition && mineManager.grid.ContainsKey(newPosition)) {
+				mineManager.eventText.text = "";
 				transform.position = newPosition;
 			}
 
