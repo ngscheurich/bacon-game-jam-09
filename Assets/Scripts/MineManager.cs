@@ -44,6 +44,9 @@ public class MineManager : MonoBehaviour
 
 	void Update()
 	{
+		if (gameManager.saneMiners.Count == 0)
+			Application.LoadLevel("GameOver");
+
 		string depthString = string.Format("Depth: {0}00 ft", gameManager.depth.ToString());
 		depthText.text = depthString;
 

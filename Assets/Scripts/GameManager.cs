@@ -50,9 +50,6 @@ public class GameManager : MonoBehaviour
 	{
 		if (initializing)
 			return;
-
-		if (saneMiners.Count == 0)
-			Application.LoadLevel("GameOver");
 	}
 
 	public void InitializeGame()

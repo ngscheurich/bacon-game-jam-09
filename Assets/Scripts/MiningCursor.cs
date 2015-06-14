@@ -36,6 +36,10 @@ public class MiningCursor : MonoBehaviour
 
 						Destroy(obj);
 
+						double timeTookToMine = Random.Range(0.5f, 2.5f);
+						GameManager.instance.currentDateTime =
+							GameManager.instance.currentDateTime.AddDays(timeTookToMine);
+
 						string outcome = "";
 
 						if (objects.Contains(mineManager.entrance)) {

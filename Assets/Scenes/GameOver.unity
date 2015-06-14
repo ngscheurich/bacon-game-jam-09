@@ -148,25 +148,7 @@ MonoBehaviour:
     m_LineSpacing: 2
   m_Text: 'GAME OVER
 
-    =========
-
-
-    You delved 1200 ft into the Earth.
-
-
-    Miner One went mad on Jul 12, 1234
-
-    Miner One went mad on Jul 12, 1234
-
-    Miner One went mad on Jul 12, 1234
-
-    Miner One went mad on Jul 12, 1234
-
-    Miner One went mad on Jul 12, 1234
-
-
-    You perished clasping the cache of artifacts that were recovered, muttering strange
-    things about the return of Ancient Gods...'
+    ========='
 --- !u!222 &60396009
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -278,7 +260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1180685607
 MonoBehaviour:
   m_ObjectHideFlags: 0
