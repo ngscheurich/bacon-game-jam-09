@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
 	public float morale = 0f;
 	public int minerCount = 5;
 	public int minerMorale = 20;
-	public enum Modes { Mining, Exploring }
-	public Modes mode = Modes.Mining;
+	public enum Modes { Mine, Explore }
+	public Modes mode = Modes.Mine;
 	public Player player;
 	public Text dateText;
 	public Text timeText;
@@ -30,8 +30,7 @@ public class GameManager : MonoBehaviour
 	public List<Miner> miners = new List<Miner>();
 	public List<MiningEvent> miningEvents = new List<MiningEvent>();
 	public bool entranceLocated;
-
-	private MiningCursor miningCursor;
+	
 	private string dataPath = "Assets/Data";
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
 	private DateTime currentDateTime;
@@ -47,8 +46,6 @@ public class GameManager : MonoBehaviour
 			DestroyObject(this);
 
 		DontDestroyOnLoad(transform.gameObject);
-
-		miningCursor = MiningCursor.instance;
 
 		InitializeGame();
 	}
@@ -68,6 +65,8 @@ public class GameManager : MonoBehaviour
 		LoadMiners();
 		LoadMiningEvents();
 		RecruitMiners();
+		mode = Modes.Mine;
+		SwitchMode();
 		initializing = false;
 	}
 
@@ -91,13 +90,17 @@ public class GameManager : MonoBehaviour
 		clone.transform.position = position;
 	}
 
-	void SwitchMode(Modes mode)
+	void SwitchMode()
 	{
-		if (mode == Modes.Mining) {
+		if (mode == Modes.Mine) {
 			if (!GridManager.instance.gameObject.activeSelf)
 				GridManager.instance.gameObject.SetActive(true);
-			GridManager.instance.grid.Clear();
-		} else if (mode == Modes.Exploring) {
+
+			if (!MiningCursor.instance.gameObject.activeSelf)
+				MiningCursor.instance.gameObject.SetActive(true);
+
+			GridManager.instance.NewGrid();
+		} else if (mode == Modes.Explore) {
 
 		} else {
 

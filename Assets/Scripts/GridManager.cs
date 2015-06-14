@@ -28,6 +28,7 @@ public class GridManager : MonoBehaviour
 	{
 		grid.Clear();
 		GenerateGrid();
+		AddStone();
 		AddEntrance();
 	}
 
@@ -37,15 +38,17 @@ public class GridManager : MonoBehaviour
 			for (int x = 0; x < gridSize.x; x++) {
 				Vector2 position = new Vector2(x, y);
 				grid.Add(position, new List<GameObject>());
-				GameObject clone = Instantiate(rockPrefab);
-				AddToGrid(position, clone);
 			}
 		}
 	}
 
-	void AddRocks()
+	void AddStone()
 	{
-
+		var positions = new List<Vector2>(grid.Keys);
+		foreach (Vector2 position in positions) {
+			GameObject stone = Instantiate(stonePrefab);
+			AddToGrid(position, stone);
+		}
 	}
 	
 	void AddEntrance()

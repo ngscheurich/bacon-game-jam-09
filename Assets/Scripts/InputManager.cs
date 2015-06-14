@@ -23,13 +23,5 @@ public class InputManager : MonoBehaviour
 
 	void Update()
 	{
-		if (gameManager.mode == GameManager.Modes.Mining) {
-			//Miner.instance.Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-		} else if (gameManager.mode == GameManager.Modes.Exploring) {
-			player.Move(Input.GetAxisRaw("Horizontal"));
-		}
-
-		// if (Input.GetButtonDown("Submit"))
-		// 	Application.LoadLevel("Mining");
 	}
 }
