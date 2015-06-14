@@ -1,7 +1,7 @@
-Bacon Game Jam 09
+Depths of Madness
 =================
 
-My currently untitled Bacon Game Jam 09 project.
+My Bacon Game Jam 09 project.
 
 ---
 
