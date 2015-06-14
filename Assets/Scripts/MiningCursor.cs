@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class MiningCursor : Activatable
 {
-		void Awake()
+	void Awake()
 	{
 		Vector2 startPosition = new Vector2(0f, GridManager.instance.gridSize.x - 1f);
 		transform.position = startPosition;

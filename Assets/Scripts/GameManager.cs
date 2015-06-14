@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager instance = null;
 
+	public GameObject hud;
 	public int currentDay = 1;
 	public float timeFactor = 8;
 	public int depth = 1;
@@ -25,9 +26,13 @@ public class GameManager : MonoBehaviour
 	public Text timeText;
 	public Text depthText;
 	public Text moraleText;
+	public List<Artifact> artifacts = new List<Artifact>();
+	public List<Miner> allMiners = new List<Miner>();
+	public List<Miner> miners = new List<Miner>();
+	public List<MiningEvent> miningEvents = new List<MiningEvent>();
 	public bool entranceLocated;
 	
-
+	private string dataPath = "Assets/Data";
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
 	private DateTime currentDateTime;
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
@@ -42,6 +47,16 @@ public class GameManager : MonoBehaviour
 			DestroyObject(this);
 
 		DontDestroyOnLoad(transform.gameObject);
+
+		hud = GameObject.Find("HUD");
+		dateText   = GameObject.Find("DateText").GetComponent<Text>();
+		timeText   = GameObject.Find("TimeText").GetComponent<Text>();
+		depthText  = GameObject.Find("DepthText").GetComponent<Text>();
+		moraleText = GameObject.Find("MoraleText").GetComponent<Text>();
+	}
+
+	void OnLevelWasLoaded(int level)
+	{
 	}
 
 	void Start()
