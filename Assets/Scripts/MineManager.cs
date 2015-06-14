@@ -10,20 +10,26 @@ public class MineManager : Activatable
 	public GameObject stonePrefab;
 	public GameObject entrancePrefab;
 	public GameObject entrance;
+	public Text dateText;
+	public Text timeText;
+	public Text depthText;
+	public Text moraleText;
+	public Text eventText;
 
-	private Text dateText;
-	private Text timeText;
-	private Text depthText;
-	private Text moraleText;
-	
+
+	private GameManager gameManager;
+
 	void Awake()
 	{
-		GameManager.instance.depth++;
+		gameManager = GameManager.instance;
 
 		dateText   = GameObject.Find("DateText").GetComponent<Text>();
 		timeText   = GameObject.Find("TimeText").GetComponent<Text>();
 		depthText  = GameObject.Find("DepthText").GetComponent<Text>();
 		moraleText = GameObject.Find("MoraleText").GetComponent<Text>();
+		eventText  = GameObject.Find("EventText").GetComponent<Text>();
+		
+		gameManager.depth++;
 
 		grid.Clear();
 		GenerateGrid();
@@ -33,15 +39,16 @@ public class MineManager : Activatable
 
 	void Update()
 	{
-		if (initializing) return;
-		
-		string depthString = string.Format("Depth: {0}00 ft", depth.ToString());
+		string depthString = string.Format("Depth: {0}00 ft", gameManager.depth.ToString());
 		depthText.text = depthString;
-		
-		maxMorale = miners.Count * minerMorale;
-		float moralePercent = Mathf.Round(morale / maxMorale * 100);
+
+		int maxMorale = gameManager.miners.Count * gameManager.minerMorale;
+		float moralePercent = Mathf.Round(gameManager.morale / maxMorale * 100);
 		string moraleString = string.Format("Morale: {0}%", moralePercent);
 		moraleText.text = moraleString;
+
+		dateText.text = string.Format(gameManager.currentDateTime.ToString("MMM d, yyyy"));
+		timeText.text = gameManager.currentDateTime.ToShortTimeString();
 	}
 
 	void GenerateGrid()

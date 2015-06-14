@@ -43,12 +43,13 @@ public class MiningCursor : Activatable
 							outcome = "{name} has located the entrance!";
 						} else if (eventChance <= miningEvent.Chance) {
 							outcome = miningEvent.Description;
-							outcome += string.Format(" -{0} morale.", miningEvent.Terror);
+							// outcome += string.Format(" -{0} morale.", miningEvent.Terror);
 							miner.AdjustMorale(-miningEvent.Terror);
 						}
 
 						string message = PersonalizeMessage(miner, outcome);
-						Debug.Log(message);
+
+						mineManager.eventText.text = message;
 					}
 				}
 			}
@@ -85,8 +86,10 @@ public class MiningCursor : Activatable
 			else if (Input.GetKey(KeyCode.DownArrow))
 				newPosition.y = newPosition.y - 1;
 
-			if (mineManager.grid.ContainsKey(newPosition))
+			if (mineManager.grid.ContainsKey(newPosition)) {
+				// mineManager.eventText.text = "";
 				transform.position = newPosition;
+			}
 
 			yield return new WaitForSeconds(.1f);
 		}

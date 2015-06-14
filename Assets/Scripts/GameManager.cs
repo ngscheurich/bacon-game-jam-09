@@ -27,12 +27,11 @@ public class GameManager : MonoBehaviour
 	public List<Miner> miners = new List<Miner>();
 	public List<MiningEvent> miningEvents = new List<MiningEvent>();
 	public bool entranceLocated;
+	public DateTime currentDateTime;
 	
 	private string dataPath = "Assets/Data";
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
-	private DateTime currentDateTime;
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());
-	private float maxMorale;
 	private bool initializing;
 
 	void Awake()
@@ -69,8 +68,6 @@ public class GameManager : MonoBehaviour
 	void Update()
 	{
 		if (initializing) return;
-
-		maxMorale = miners.Count * minerMorale;
   	}
 
 	void InstantiateObject(GameObject objekt, Vector2 position)
@@ -103,9 +100,6 @@ public class GameManager : MonoBehaviour
 			int daysDelta = dateTimeDelta.Days;
 
 			currentDay = daysDelta + 1;
-
-			dateText.text = string.Format(currentDateTime.ToString("MMM d, yyyy"));
-			timeText.text = currentDateTime.ToShortTimeString();
 
 			yield return new WaitForSeconds(1);
 		}
