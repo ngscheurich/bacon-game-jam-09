@@ -17,6 +17,7 @@ public class MiningCursor : Activatable
 			DestroyObject(this);
 		
 		DontDestroyOnLoad(transform.gameObject);
+
 		gameManager = GameManager.instance;
 		gridManager = GridManager.instance;
 
@@ -43,7 +44,7 @@ public class MiningCursor : Activatable
 			List<GameObject> objects = gridManager.grid[key];
 			foreach (GameObject obj in objects) {
 				if (obj != null) {
-					if (obj.tag == "Rock") {
+					if (obj.tag == "Stone") {
 						int minerIndex = Random.Range(0, gameManager.miners.Count);
 						Miner miner = gameManager.miners[minerIndex];
 

@@ -46,13 +46,11 @@ public class GameManager : MonoBehaviour
 			DestroyObject(this);
 
 		DontDestroyOnLoad(transform.gameObject);
-
-		InitializeGame();
 	}
 
 	void Start()
 	{
-
+		InitializeGame();
 		currentDateTime = initialDateTime;
 		StartCoroutine(AdvanceTime());
 	}
@@ -94,10 +92,10 @@ public class GameManager : MonoBehaviour
 	{
 		if (mode == Modes.Mine) {
 			GridManager.instance.Activate();
-			//MiningCursor.instance.Activate();
+			MiningCursor.instance.Activate();
 		} else if (mode == Modes.Explore) {
 			GridManager.instance.Deactivate();
-			//MiningCursor.instance.Deactivate();
+			// MiningCursor.instance.Deactivate();
 		} else {
 
 		}
