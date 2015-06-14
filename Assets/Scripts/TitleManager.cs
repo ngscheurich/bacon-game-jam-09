@@ -4,34 +4,27 @@ using System.Collections;
 
 public class TitleManager : MonoBehaviour
 {
-	public GameObject titleCanvas;
-	public GameObject introCanvas;
-	
-	private GameManager gameManager;
+	private Text titleText;
+	private Text introText;
 	private bool titleDone;
 	
 	void Awake()
 	{
-		gameManager = GameManager.instance;
-		
-		titleCanvas = GameObject.Find("TitleCanvas");
-		introCanvas = GameObject.Find("IntroCanvas");
-
-		introCanvas.SetActive(false);
+		titleText = GameObject.Find("TitleText").GetComponent<Text>();
+		introText = GameObject.Find("IntroText").GetComponent<Text>();
+		introText.enabled = false;
 	}
 
 	void Update()
 	{
-		if (Input.GetKey(KeyCode.Return)) {
+		if (Input.GetKeyDown(KeyCode.Return)) {
 			if (!titleDone) {
-				titleCanvas.SetActive(false);
-				introCanvas.SetActive(true);
+				titleText.enabled = false;
+				introText.enabled = true;
 				titleDone = true;
 			} else {
-
-
+				Application.LoadLevel("Mine");
 			}
 		}
-			Application.LoadLevel("Mine");
 	}
 }

@@ -98,7 +98,7 @@ GameObject:
   - 222: {fileID: 60396009}
   - 114: {fileID: 60396008}
   m_Layer: 5
-  m_Name: TitleText
+  m_Name: GameOverText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,7 +186,7 @@ GameObject:
   - 114: {fileID: 161742779}
   - 114: {fileID: 161742778}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: GameOverCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e760ae5ef3994968bc5ff4bbcec246f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  titleText: {fileID: 0}
 --- !u!114 &161742779
 MonoBehaviour:
   m_ObjectHideFlags: 0
