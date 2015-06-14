@@ -2,21 +2,25 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MiningCursor : Singleton
+public class MiningCursor : Activatable
 {
 	public static MiningCursor instance = null;
 
 	private GameManager gameManager;
   	private GridManager gridManager;
 
-	protected virtual void Awake()
+	void Awake()
 	{
+		if (instance == null)
+			instance = this;
+		else if (instance != this)
+			DestroyObject(this);
+		
+		DontDestroyOnLoad(transform.gameObject);
 		gameManager = GameManager.instance;
 		gridManager = GridManager.instance;
 
 		StartCoroutine(Move());
-
-		base.Awake();
 	}
 
 	void Update()

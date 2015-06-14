@@ -94,8 +94,10 @@ public class GameManager : MonoBehaviour
 	{
 		if (mode == Modes.Mine) {
 			GridManager.instance.Activate();
+			//MiningCursor.instance.Activate();
 		} else if (mode == Modes.Explore) {
-
+			GridManager.instance.Deactivate();
+			//MiningCursor.instance.Deactivate();
 		} else {
 
 		}

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GridManager : Singleton
+public class GridManager : Activatable
 {
 	public static GridManager instance = null;
 
@@ -13,7 +13,17 @@ public class GridManager : Singleton
 	public GameObject stonePrefab;
 	public GameObject entrancePrefab;
 	public GameObject entrance;
-	
+
+	void Awake()
+	{
+		if (instance == null)
+			instance = this;
+		else if (instance != this)
+			DestroyObject(this);
+		
+		DontDestroyOnLoad(transform.gameObject);
+	}
+
 	public virtual void Activate()
 	{
 		NewGrid();
@@ -49,8 +59,8 @@ public class GridManager : Singleton
 	
 	void AddEntrance()
 	{
-		float x = Mathf.Round(Random.Range(0, gridSize.x));
-		float y = Mathf.Round(Random.Range(0, gridSize.y));
+		float x = Mathf.Round(Random.Range(0, gridSize.x - 1));
+		float y = Mathf.Round(Random.Range(0, gridSize.y - 1));
 		Vector2 position = new Vector2(x, y);
 		entrance = Instantiate(entrancePrefab);
 		AddToGrid(position, entrance);
