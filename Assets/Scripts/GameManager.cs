@@ -25,13 +25,9 @@ public class GameManager : MonoBehaviour
 	public Text timeText;
 	public Text depthText;
 	public Text moraleText;
-	public List<Artifact> artifacts = new List<Artifact>();
-	public List<Miner> allMiners = new List<Miner>();
-	public List<Miner> miners = new List<Miner>();
-	public List<MiningEvent> miningEvents = new List<MiningEvent>();
 	public bool entranceLocated;
 	
-	private string dataPath = "Assets/Data";
+
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
 	private DateTime currentDateTime;
 	private Deserializer deserializer = new Deserializer(namingConvention: new UnderscoredNamingConvention());

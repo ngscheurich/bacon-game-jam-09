@@ -4,12 +4,9 @@ using System.Collections.Generic;
 
 public class MiningCursor : Activatable
 {
-	private GameManager gameManager;
-  	private GridManager gridManager;
-
-	void Awake()
+		void Awake()
 	{
-		Vector2 startPosition = new Vector2(0f, gridManager.gridSize.x - 1f);
+		Vector2 startPosition = new Vector2(0f, GridManager.instance.gridSize.x - 1f);
 		transform.position = startPosition;
 		StartCoroutine(Move());
 	}
@@ -24,24 +21,24 @@ public class MiningCursor : Activatable
 	void Mine()
 	{
 		Vector2 key = transform.position;
-		if (gridManager.grid.ContainsKey(key)) {
-			List<GameObject> objects = gridManager.grid[key];
+		if (GridManager.instance.grid.ContainsKey(key)) {
+			List<GameObject> objects = GridManager.instance.grid[key];
 			foreach (GameObject obj in objects) {
 				if (obj != null) {
 					if (obj.tag == "Stone") {
-						int minerIndex = Random.Range(0, gameManager.miners.Count);
-						Miner miner = gameManager.miners[minerIndex];
+						int minerIndex = Random.Range(0, GameManager.instance.miners.Count);
+						Miner miner = GameManager.instance.miners[minerIndex];
 
-						int eventIndex = Random.Range(0, gameManager.miningEvents.Count);
-						MiningEvent miningEvent = gameManager.miningEvents[eventIndex];
-						int eventChance = Random.Range(0, 11) * gameManager.depth;
+						int eventIndex = Random.Range(0, GameManager.instance.miningEvents.Count);
+						MiningEvent miningEvent = GameManager.instance.miningEvents[eventIndex];
+						int eventChance = Random.Range(0, 11) * GameManager.instance.depth;
 
 						Destroy(obj);
 
 						string outcome = "Nothing happens...";
 
-						if (objects.Contains(gridManager.entrance)) {
-							gameManager.entranceLocated = true;
+						if (objects.Contains(GridManager.instance.entrance)) {
+							GameManager.instance.entranceLocated = true;
 							outcome = "{name} has located the entrance!";
 						} else if (eventChance <= miningEvent.Chance) {
 							outcome = miningEvent.Description;
