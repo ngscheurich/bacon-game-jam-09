@@ -16,9 +16,8 @@ public class GameManager : MonoBehaviour
 	public int currentDay = 1;
 	public float timeFactor = 8;
 	public int depth;
-	public float morale;
 	public int minerCount = 5;
-	public int minerMorale = 20;
+	public float minerMorale = 20;
 	public enum Mode
 	{
 		Mine,
@@ -29,6 +28,7 @@ public class GameManager : MonoBehaviour
 	public List<Artifact> artifacts = new List<Artifact>();
 	public List<Miner> allMiners = new List<Miner>();
 	public List<Miner> miners = new List<Miner>();
+	public List<Miner> saneMiners = new List<Miner>();
 	public List<MiningEvent> miningEvents = new List<MiningEvent>();
 	public bool entranceLocated;
 	public DateTime currentDateTime;
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 		if (initializing)
 			return;
 
-		if (miners.Count == 0)
+		if (saneMiners.Count == 0)
 			Application.LoadLevel("GameOver");
 	}
 
@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
 			int random = UnityEngine.Random.Range(0, allMiners.Count);
 			Miner miner = allMiners[random];
 			miners.Add(miner);
+			saneMiners.Add(miner);
 			miner.morale = minerMorale;
 			morale = morale + minerMorale;
 			allMiners.Remove(miner);
@@ -174,6 +175,8 @@ public class Miner
 	public string Name { get; set; }
 	public string Gender { get; set; }
 	public int morale;
+	public bool insane;
+	public DateTime whenWentInsane;
 
 	public void AdjustMorale(int amount)
 	{
@@ -188,8 +191,10 @@ public class Miner
 
 	public void BecomeInsane()
 	{
-		Debug.Log(string.Format("{0} has gone CRAZY!!", Name));
-		GameManager.instance.miners.Remove(this);
+		Debug.Log(string.Format("{0} has gone mad.", Name));
+		insane = true;
+		GameManager.instance.saneMiners.Remove(this);
+		whenWentInsane = GameManager.instance.currentDateTime;
 	}
 }
 

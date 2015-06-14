@@ -300,7 +300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e760ae5ef3994968bc5ff4bbcec246f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleText: {fileID: 0}
 --- !u!1001 &879403545
 Prefab:
   m_ObjectHideFlags: 0
@@ -346,7 +345,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
       propertyPath: minerCount
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11471086, guid: c83b7d07ec1a442eeb56a7f3136ddaf0, type: 2}
       propertyPath: minerMorale
@@ -366,7 +365,6 @@ GameObject:
   - 223: {fileID: 1699551312}
   - 114: {fileID: 1699551311}
   - 114: {fileID: 1699551310}
-  - 114: {fileID: 1699551309}
   m_Layer: 5
   m_Name: IntroCanvas
   m_TagString: Untagged
@@ -374,18 +372,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1699551309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1699551308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e760ae5ef3994968bc5ff4bbcec246f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  titleText: {fileID: 0}
 --- !u!114 &1699551310
 MonoBehaviour:
   m_ObjectHideFlags: 0

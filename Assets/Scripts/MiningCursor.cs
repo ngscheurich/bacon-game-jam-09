@@ -27,8 +27,8 @@ public class MiningCursor : MonoBehaviour
 			foreach (GameObject obj in objects) {
 				if (obj != null) {
 					if (obj.tag == "Stone") {
-						int minerIndex = Random.Range(0, GameManager.instance.miners.Count);
-						Miner miner = GameManager.instance.miners[minerIndex];
+						int minerIndex = Random.Range(0, GameManager.instance.saneMiners.Count);
+						Miner miner = GameManager.instance.saneMiners[minerIndex];
 
 						int eventIndex = Random.Range(0, GameManager.instance.miningEvents.Count);
 						MiningEvent miningEvent = GameManager.instance.miningEvents[eventIndex];
