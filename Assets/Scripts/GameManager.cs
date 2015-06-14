@@ -19,12 +19,12 @@ public class GameManager : MonoBehaviour
 	public float morale;
 	public int minerCount = 5;
 	public int minerMorale = 20;
-	public enum Modes
+	public enum Mode
 	{
 		Mine,
 		Explore
 	}
-	public Modes mode = Modes.Mine;
+	public Mode mode = Mode.Mine;
 	public Player player;
 	public List<Artifact> artifacts = new List<Artifact>();
 	public List<Miner> allMiners = new List<Miner>();
