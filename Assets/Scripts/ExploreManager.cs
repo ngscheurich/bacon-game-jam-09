@@ -57,5 +57,4 @@ public class ExploreManager : MonoBehaviour
 			Debug.LogException(e);
 		}
 	}
-
 }

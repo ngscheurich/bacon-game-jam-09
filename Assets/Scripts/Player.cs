@@ -5,44 +5,21 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-	public static Player instance = null;
+	public float speed = 10f;
+	public float jumpPower = 10f;
+	public bool grounded;
+	public Rigidbody2D rb2d;
 
-	public int sanity = 100;
-	public int health = 100;
-	public int fatigue = 0;
-	public int speed = 10;
-	
-	public int fatigueFactor = 1;
-
-	void Awake()
+	void Start()
 	{
-		if (instance == null)
-			instance = this;
-		else if (instance != this)
-			DestroyObject(this);
-
-		DontDestroyOnLoad(transform.gameObject);
+		rb2d = GetComponent<Rigidbody2D>();
 	}
 
-	public void AdjustSanity(int amount)
+	void FixedUpdate()
 	{
-		sanity += amount;
-	}
-
-	public void AdjustHealth(int amount)
-	{
-		health += amount;
-  	}
-
-	public void AdjustFatigue(int amount)
-	{
-		fatigue += amount;
-  	}
-
-	public void Move(float x) {
-		float newPositionX = transform.position.x + x * Time.deltaTime * speed;
-		float newPositionY = transform.position.y;
-		Vector2 newPosition = new Vector2(newPositionX, newPositionY);
-		transform.position = newPosition;
+		RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
+		if (hit.collider != null) {
+			float distanceFromGround = hit.point.y - transform.position.y;
+		}
 	}
 }
