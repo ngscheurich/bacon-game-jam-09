@@ -47,7 +47,7 @@ public class MineManager : MonoBehaviour
 		string depthString = string.Format("Depth: {0}00 ft", gameManager.depth.ToString());
 		depthText.text = depthString;
 
-		int maxMorale = gameManager.miners.Count * gameManager.minerMorale;
+		float maxMorale = gameManager.miners.Count * gameManager.minerMorale;
 		float moralePercent = Mathf.Round(gameManager.morale / maxMorale * 100);
 		string moraleString = string.Format("Morale: {0}%", moralePercent);
 		moraleText.text = moraleString;

@@ -12,19 +12,11 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager instance = null;
 
-	public GameObject hud;
-	public int currentDay = 1;
 	public float timeFactor = 8;
 	public int depth;
+	public float morale;
 	public int minerCount = 5;
-	public float minerMorale = 20;
-	public enum Mode
-	{
-		Mine,
-		Explore
-	}
-	public Mode mode = Mode.Mine;
-	public Player player;
+	public float minerMorale = 10;
 	public List<Artifact> artifacts = new List<Artifact>();
 	public List<Miner> allMiners = new List<Miner>();
 	public List<Miner> miners = new List<Miner>();
@@ -50,19 +42,8 @@ public class GameManager : MonoBehaviour
 
 	void Start()
 	{
-		InitializeGame();
 		currentDateTime = initialDateTime;
 		StartCoroutine(AdvanceTime());
-	}
-
-	void InitializeGame()
-	{
-		initializing = true;
-		LoadArtifacts();
-		LoadMiners();
-		LoadMiningEvents();
-		RecruitMiners();
-		initializing = false;
 	}
 
 	void Update()
@@ -74,6 +55,17 @@ public class GameManager : MonoBehaviour
 			Application.LoadLevel("GameOver");
 	}
 
+	public void InitializeGame()
+	{
+		initializing = true;
+		depth = 0;
+		LoadArtifacts();
+		LoadMiners();
+		LoadMiningEvents();
+		RecruitMiners();
+		initializing = false;
+	}
+
 	void InstantiateObject(GameObject objekt, Vector2 position)
 	{
 		GameObject clone = (GameObject)Instantiate(objekt);
@@ -83,6 +75,7 @@ public class GameManager : MonoBehaviour
 
 	void RecruitMiners()
 	{
+		miners.Clear();
 		int i = 0;
 		while (i < minerCount) {
 			int random = UnityEngine.Random.Range(0, allMiners.Count);
@@ -100,12 +93,6 @@ public class GameManager : MonoBehaviour
 	{
 		while (true) {
 			currentDateTime = currentDateTime.AddMinutes(1 * timeFactor);
-
-			TimeSpan dateTimeDelta = currentDateTime.Subtract(initialDateTime);
-			int daysDelta = dateTimeDelta.Days;
-
-			currentDay = daysDelta + 1;
-
 			yield return new WaitForSeconds(1);
 		}
 	}
@@ -123,6 +110,7 @@ public class GameManager : MonoBehaviour
 
 	void LoadArtifacts()
 	{
+		artifacts.Clear();
 		StringReader input = GetDataInput("Artifacts");
 
 		try {
@@ -137,6 +125,7 @@ public class GameManager : MonoBehaviour
 
 	void LoadMiners()
 	{
+		allMiners.Clear();
 		StringReader input = GetDataInput("Miners");
 		
 		try {
@@ -151,6 +140,7 @@ public class GameManager : MonoBehaviour
 
 	void LoadMiningEvents()
 	{
+		miningEvents.Clear();
 		StringReader input = GetDataInput("MiningEvents");
 		
 		try {
@@ -174,18 +164,18 @@ public class Miner
 {
 	public string Name { get; set; }
 	public string Gender { get; set; }
-	public int morale;
+	public float morale;
 	public bool insane;
 	public DateTime whenWentInsane;
 
-	public void AdjustMorale(int amount)
+	public void AdjustMorale(float amount)
 	{
-		int moraleDelta = morale + amount;
+		float moraleDelta = morale + amount;
 		if (moraleDelta <= 0)
 			BecomeInsane();
 		else
 			morale += amount;
-		int totalMoraleAdjustment = (moraleDelta < 0) ? morale : amount;
+		float totalMoraleAdjustment = (moraleDelta < 0) ? morale : amount;
 		GameManager.instance.morale += totalMoraleAdjustment;
 	}
 

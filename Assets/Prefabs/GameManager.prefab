@@ -39,15 +39,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd6bc11481e74ff3b9acc159a3ead01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hud: {fileID: 0}
-  currentDay: 1
   timeFactor: 8
-  depth: 1
+  depth: 0
   morale: 0
   minerCount: 5
-  minerMorale: 20
-  mode: 0
-  player: {fileID: 0}
+  minerMorale: 10
   entranceLocated: 0
 --- !u!1001 &100100000
 Prefab:

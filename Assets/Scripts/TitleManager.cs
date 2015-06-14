@@ -10,6 +10,7 @@ public class TitleManager : MonoBehaviour
 	
 	void Awake()
 	{
+		GameManager.instance.InitializeGame();
 		titleText = GameObject.Find("TitleText").GetComponent<Text>();
 		introText = GameObject.Find("IntroText").GetComponent<Text>();
 		introText.enabled = false;

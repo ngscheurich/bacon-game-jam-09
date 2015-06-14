@@ -15,7 +15,7 @@ public class GameOverManager : MonoBehaviour{
 		outro += string.Format("You delved {0}00 ft into the Earth.\n\n", gameManager.depth.ToString());
 
 		foreach (Miner miner in gameManager.miners) {
-			outro += string.Format("{0} went mad on {1}.\n", miner.Name, miner.whenWentInsane.ToShortDateString());
+			outro += string.Format("{0} went mad on {1}.\n", miner.Name, miner.whenWentInsane.ToString("MMM d, yyyy"));
 		}
 
 		outro += "\nYou perished clasping the cache of artifacts that were recovered, muttering strange things about the return of Ancient Gods...";
@@ -25,8 +25,7 @@ public class GameOverManager : MonoBehaviour{
 	
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Return)) {
-
-		}
+		if (Input.GetKeyDown(KeyCode.Return))
+			Application.LoadLevel("Title");
 	}
 }
