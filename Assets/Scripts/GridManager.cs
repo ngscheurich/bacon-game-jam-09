@@ -12,6 +12,7 @@ public class GridManager : MonoBehaviour
 
 	public GameObject rockPrefab;
 	public GameObject pebblePrefab;
+	public Entrance entrance;
 
 	void Awake()
 	{
