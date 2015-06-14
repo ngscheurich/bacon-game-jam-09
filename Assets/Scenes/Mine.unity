@@ -324,7 +324,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Press Enter to enter the temple...
+  m_Text: Press Return to enter the temple...
 --- !u!222 &286186015
 CanvasRenderer:
   m_ObjectHideFlags: 0

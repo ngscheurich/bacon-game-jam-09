@@ -388,7 +388,7 @@ MonoBehaviour:
 
 
 
-    Press Space to continue...'
+    Press Return to continue...'
 --- !u!222 &1702026318
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MiningCursor : Activatable
+public class MiningCursor : MonoBehaviour
 {
 	public MineManager mineManager;
 
@@ -42,9 +42,9 @@ public class MiningCursor : Activatable
 							GameManager.instance.entranceLocated = true;
 							outcome = "{name} has located the entrance!";
 							mineManager.entranceLocated = true;
+							StartCoroutine(mineManager.FlashText(mineManager.enterText, 1f));
 						} else if (eventChance <= miningEvent.Chance) {
 							outcome = miningEvent.Description;
-							// outcome += string.Format(" -{0} morale.", miningEvent.Terror);
 							miner.AdjustMorale(-miningEvent.Terror);
 						}
 

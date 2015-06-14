@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class MineManager : Activatable
+public class MineManager : MonoBehaviour
 {
 	public Vector2 gridSize = new Vector2(20f, 20f);
 	public Dictionary<Vector2, List<GameObject>> grid = new Dictionary<Vector2, List<GameObject>>();
@@ -56,7 +56,8 @@ public class MineManager : Activatable
 		dateText.text = string.Format(gameManager.currentDateTime.ToString("MMM d, yyyy"));
 		timeText.text = gameManager.currentDateTime.ToShortTimeString();
 
-		if (entranceLocated) StartCoroutine(FlashText(enterText, 1f));
+		if (entranceLocated && Input.GetKey(KeyCode.Return))
+			Application.LoadLevel("Explore");
 	}
 	
 	void GenerateGrid()
@@ -100,7 +101,7 @@ public class MineManager : Activatable
 		}
 	}
 
-	IEnumerator FlashText(Text text, float interval)
+	public IEnumerator FlashText(Text text, float interval)
 	{
 		while (true) {
 			text.enabled = !text.enabled;
