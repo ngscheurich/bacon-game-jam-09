@@ -1,43 +1,47 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GridManager : Activatable
+public class MineManager : Activatable
 {
-	public static GridManager instance = null;
-
 	public Vector2 gridSize = new Vector2(20f, 20f);
-
 	public Dictionary<Vector2, List<GameObject>> grid = new Dictionary<Vector2, List<GameObject>>();
-
 	public GameObject stonePrefab;
 	public GameObject entrancePrefab;
 	public GameObject entrance;
 
+	private Text dateText;
+	private Text timeText;
+	private Text depthText;
+	private Text moraleText;
+	
 	void Awake()
 	{
-		if (instance == null)
-			instance = this;
-		else if (instance != this)
-			DestroyObject(this);
-		
-		DontDestroyOnLoad(transform.gameObject);
+		GameManager.instance.depth++;
 
-		Reload();
-	}
+		dateText   = GameObject.Find("DateText").GetComponent<Text>();
+		timeText   = GameObject.Find("TimeText").GetComponent<Text>();
+		depthText  = GameObject.Find("DepthText").GetComponent<Text>();
+		moraleText = GameObject.Find("MoraleText").GetComponent<Text>();
 
-	public override void Activate()
-	{
-		Reload();
-		base.Activate();
-	}
-
-	public void Reload()
-	{
 		grid.Clear();
 		GenerateGrid();
 		AddStone();
 		AddEntrance();
+	}
+
+	void Update()
+	{
+		if (initializing) return;
+		
+		string depthString = string.Format("Depth: {0}00 ft", depth.ToString());
+		depthText.text = depthString;
+		
+		maxMorale = miners.Count * minerMorale;
+		float moralePercent = Mathf.Round(morale / maxMorale * 100);
+		string moraleString = string.Format("Morale: {0}%", moralePercent);
+		moraleText.text = moraleString;
 	}
 
 	void GenerateGrid()

@@ -15,17 +15,13 @@ public class GameManager : MonoBehaviour
 	public GameObject hud;
 	public int currentDay = 1;
 	public float timeFactor = 8;
-	public int depth = 1;
-	public float morale = 0f;
+	public int depth;
+	public float morale;
 	public int minerCount = 5;
 	public int minerMorale = 20;
 	public enum Modes { Mine, Explore }
 	public Modes mode = Modes.Mine;
 	public Player player;
-	public Text dateText;
-	public Text timeText;
-	public Text depthText;
-	public Text moraleText;
 	public List<Artifact> artifacts = new List<Artifact>();
 	public List<Miner> allMiners = new List<Miner>();
 	public List<Miner> miners = new List<Miner>();
@@ -47,12 +43,6 @@ public class GameManager : MonoBehaviour
 			DestroyObject(this);
 
 		DontDestroyOnLoad(transform.gameObject);
-
-		hud = GameObject.Find("HUD");
-		dateText   = GameObject.Find("DateText").GetComponent<Text>();
-		timeText   = GameObject.Find("TimeText").GetComponent<Text>();
-		depthText  = GameObject.Find("DepthText").GetComponent<Text>();
-		moraleText = GameObject.Find("MoraleText").GetComponent<Text>();
 	}
 
 	void OnLevelWasLoaded(int level)
@@ -80,13 +70,7 @@ public class GameManager : MonoBehaviour
 	{
 		if (initializing) return;
 
-		string depthString = string.Format("Depth: {0}00 ft", depth.ToString());
-		depthText.text = depthString;
-
 		maxMorale = miners.Count * minerMorale;
-		float moralePercent = Mathf.Round(morale / maxMorale * 100);
-		string moraleString = string.Format("Morale: {0}%", moralePercent);
-		moraleText.text = moraleString;
   	}
 
 	void InstantiateObject(GameObject objekt, Vector2 position)

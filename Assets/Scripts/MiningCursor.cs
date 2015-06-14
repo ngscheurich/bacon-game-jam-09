@@ -4,25 +4,26 @@ using System.Collections.Generic;
 
 public class MiningCursor : Activatable
 {
+	public MineManager mineManager;
+
 	void Awake()
 	{
-		Vector2 startPosition = new Vector2(0f, GridManager.instance.gridSize.x - 1f);
+		Vector2 startPosition = new Vector2(0f, mineManager.gridSize.x - 1f);
 		transform.position = startPosition;
 		StartCoroutine(Move());
 	}
 	
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space)) {
+		if (Input.GetKeyDown(KeyCode.Space))
 			Mine();
-		}
 	}
 	
 	void Mine()
 	{
 		Vector2 key = transform.position;
-		if (GridManager.instance.grid.ContainsKey(key)) {
-			List<GameObject> objects = GridManager.instance.grid[key];
+		if (mineManager.grid.ContainsKey(key)) {
+			List<GameObject> objects = mineManager.grid[key];
 			foreach (GameObject obj in objects) {
 				if (obj != null) {
 					if (obj.tag == "Stone") {
@@ -37,7 +38,7 @@ public class MiningCursor : Activatable
 
 						string outcome = "Nothing happens...";
 
-						if (objects.Contains(GridManager.instance.entrance)) {
+						if (objects.Contains(mineManager.entrance)) {
 							GameManager.instance.entranceLocated = true;
 							outcome = "{name} has located the entrance!";
 						} else if (eventChance <= miningEvent.Chance) {
@@ -84,7 +85,8 @@ public class MiningCursor : Activatable
 			else if (Input.GetKey(KeyCode.DownArrow))
 				newPosition.y = newPosition.y - 1;
 
-			transform.position = newPosition;
+			if (mineManager.grid.ContainsKey(newPosition))
+				transform.position = newPosition;
 
 			yield return new WaitForSeconds(.1f);
 		}
