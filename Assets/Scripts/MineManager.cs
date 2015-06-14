@@ -24,12 +24,12 @@ public class MineManager : MonoBehaviour
 	{
 		gameManager = GameManager.instance;
 
-		dateText   = GameObject.Find("DateText").GetComponent<Text>();
-		timeText   = GameObject.Find("TimeText").GetComponent<Text>();
-		depthText  = GameObject.Find("DepthText").GetComponent<Text>();
+		dateText = GameObject.Find("DateText").GetComponent<Text>();
+		timeText = GameObject.Find("TimeText").GetComponent<Text>();
+		depthText = GameObject.Find("DepthText").GetComponent<Text>();
 		moraleText = GameObject.Find("MoraleText").GetComponent<Text>();
-		enterText  = GameObject.Find("EnterText").GetComponent<Text>();
-		eventText  = GameObject.Find("EventText").GetComponent<Text>();
+		enterText = GameObject.Find("EnterText").GetComponent<Text>();
+		eventText = GameObject.Find("EventText").GetComponent<Text>();
 
 		enterText.enabled = false;
 		eventText.text = "";
@@ -56,7 +56,8 @@ public class MineManager : MonoBehaviour
 		timeText.text = gameManager.currentDateTime.ToShortTimeString();
 
 		if (entranceLocated && Input.GetKey(KeyCode.Return))
-			Application.LoadLevel("Explore");
+			// Application.LoadLevel("Explore");
+			Application.LoadLevel("Mine");
 	}
 	
 	void GenerateGrid()
@@ -106,5 +107,5 @@ public class MineManager : MonoBehaviour
 			text.enabled = !text.enabled;
 			yield return new WaitForSeconds(interval);
 		}
-  	}
+	}
 }

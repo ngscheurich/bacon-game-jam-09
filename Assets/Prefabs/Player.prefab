@@ -72,8 +72,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 30
   jumpPower: 300
+  drag: 1
   grounded: 0
-  rb2d: {fileID: 0}
+  rigidBody: {fileID: 0}
   groundCheckTolerance: .0149999997
 --- !u!212 &21277432
 SpriteRenderer:

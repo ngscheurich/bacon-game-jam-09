@@ -7,13 +7,15 @@ public class Player : MonoBehaviour
 {
 	public float speed = 30f;
 	public float jumpPower = 300f;
+	public float drag = 2;
 	public bool grounded;
-	public Rigidbody2D rb2d;
+	public Rigidbody2D rigidBody;
 	public float groundCheckTolerance = .015f;
 
 	void Start()
 	{
-		rb2d = GetComponent<Rigidbody2D>();
+		rigidBody = GetComponent<Rigidbody2D>();
+		rigidBody.drag = drag;
 	}
 
 	void FixedUpdate()
@@ -28,14 +30,16 @@ public class Player : MonoBehaviour
 
 		if (grounded) {
 			if (Input.GetKeyDown(KeyCode.Space))
-				rb2d.AddForce(Vector2.up * jumpPower);
+				rigidBody.AddForce(Vector2.up * jumpPower);
 
-			Vector2 sideForce = Vector2.zero;
-			if (Input.GetKey(KeyCode.RightArrow))
-				sideForce.x = 1;
-			else if (Input.GetKey(KeyCode.LeftArrow))
-				sideForce.x = -1;
-			rb2d.AddForce(sideForce * speed);
+
 		}
+
+		Vector2 sideForce = Vector2.zero;
+		if (Input.GetKey(KeyCode.RightArrow))
+			sideForce.x = 1;
+		else if (Input.GetKey(KeyCode.LeftArrow))
+			sideForce.x = -1;
+		rigidBody.AddForce(sideForce * speed);
 	}
 }
