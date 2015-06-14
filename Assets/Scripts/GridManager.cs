@@ -6,13 +6,11 @@ public class GridManager : MonoBehaviour
 {
 	public static GridManager instance = null;
 
-	public Vector2 gridSize = new Vector2(20f, 20f);
 	public Dictionary<Vector2, List<GameObject>> grid = new Dictionary<Vector2, List<GameObject>>();
-	public List<Vector2> gridPositions = new List<Vector2>();
+	public Vector2 gridSize = new Vector2(20f, 20f);
 
 	public GameObject rockPrefab;
-	public GameObject pebblePrefab;
-	public Entrance entrance;
+	public GameObject entrancePrefab;
 
 	void Awake()
 	{
@@ -24,6 +22,7 @@ public class GridManager : MonoBehaviour
 		DontDestroyOnLoad(transform.gameObject);
 
 		GenerateGrid();
+		AddEntrance();
 	}
 
 	void GenerateGrid()
@@ -37,6 +36,15 @@ public class GridManager : MonoBehaviour
 			}
 		}
 	}
+	
+	public void AddEntrance()
+	{
+		float x = Mathf.Floor(Random.Range(0, gridSize.x));
+		float y = Mathf.Floor(Random.Range(0, gridSize.y));
+		Vector2 position = new Vector2(x, y);
+		GameObject entrance = Instantiate(entrancePrefab);
+		AddToGrid(position, entrance);
+	}
 
 	public void AddToGrid(Vector2 key, GameObject obj)
 	{
@@ -47,7 +55,7 @@ public class GridManager : MonoBehaviour
 			obj.transform.parent = transform;
 			obj.transform.position = key;
 		} else {
-			Debug.Log("Not a valid grid key");
+			Debug.LogError(string.Format("{0} is not a valid grid key", key));
 		}
 	}
 }
