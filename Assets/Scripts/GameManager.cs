@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
 	public float morale = 0f;
 	public int minerCount = 5;
 	public int minerMorale = 20;
-	public enum Phases { Mining, Exploring }
-	public Phases phase = Phases.Mining;
+	public enum Modes { Mining, Exploring }
+	public Modes mode = Modes.Mining;
 	public Player player;
 	public Text dateText;
 	public Text timeText;
@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour
 	public List<Miner> miners = new List<Miner>();
 	public List<MiningEvent> miningEvents = new List<MiningEvent>();
 	public bool entranceLocated;
-	
+
+	private MiningCursor miningCursor;
 	private string dataPath = "Assets/Data";
 	private DateTime initialDateTime = new DateTime(1892, 12, 3, 8, 0, 0);
 	private DateTime currentDateTime;
@@ -46,6 +47,8 @@ public class GameManager : MonoBehaviour
 			DestroyObject(this);
 
 		DontDestroyOnLoad(transform.gameObject);
+
+		miningCursor = MiningCursor.instance;
 
 		InitializeGame();
 	}
@@ -88,20 +91,33 @@ public class GameManager : MonoBehaviour
 		clone.transform.position = position;
 	}
 
-	IEnumerator Mining()
+	void SwitchMode(Modes mode)
 	{
-		while (phase == Phases.Mining) {
-			yield return null;
+		if (mode == Modes.Mining) {
+			if (!GridManager.instance.gameObject.activeSelf)
+				GridManager.instance.gameObject.SetActive(true);
+			GridManager.instance.grid.Clear();
+		} else if (mode == Modes.Exploring) {
+
+		} else {
+
 		}
 	}
 
-	IEnumerator Exploring()
+	void RecruitMiners()
 	{
-		while (phase == Phases.Exploring) {
-			yield return null;
+		int i = 0;
+		while (i < minerCount) {
+			int random = UnityEngine.Random.Range(0, allMiners.Count);
+			Miner miner = allMiners[random];
+			miners.Add(miner);
+			miner.morale = minerMorale;
+			morale = morale + minerMorale;
+			allMiners.Remove(miner);
+			i++;
 		}
 	}
-
+	
 	IEnumerator AdvanceTime()
 	{
 		while (true) {
@@ -155,20 +171,6 @@ public class GameManager : MonoBehaviour
 			}
 		} catch(Exception e) {
 			Debug.LogException(e);
-		}
-	}
-
-	void RecruitMiners()
-	{
-		int i = 0;
-		while (i < minerCount) {
-			int random = UnityEngine.Random.Range(0, allMiners.Count);
-			Miner miner = allMiners[random];
-			miners.Add(miner);
-			miner.morale = minerMorale;
-			morale = morale + minerMorale;
-			allMiners.Remove(miner);
-			i++;
 		}
 	}
 

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class InputManager : MonoBehaviour
@@ -23,9 +23,9 @@ public class InputManager : MonoBehaviour
 
 	void Update()
 	{
-		if (gameManager.phase == GameManager.Phases.Mining) {
+		if (gameManager.mode == GameManager.Modes.Mining) {
 			//Miner.instance.Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-		} else if (gameManager.phase == GameManager.Phases.Exploring) {
+		} else if (gameManager.mode == GameManager.Modes.Exploring) {
 			player.Move(Input.GetAxisRaw("Horizontal"));
 		}
 

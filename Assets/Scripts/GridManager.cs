@@ -6,10 +6,11 @@ public class GridManager : MonoBehaviour
 {
 	public static GridManager instance = null;
 
-	public Dictionary<Vector2, List<GameObject>> grid = new Dictionary<Vector2, List<GameObject>>();
 	public Vector2 gridSize = new Vector2(20f, 20f);
 
-	public GameObject rockPrefab;
+	public Dictionary<Vector2, List<GameObject>> grid = new Dictionary<Vector2, List<GameObject>>();
+
+	public GameObject stonePrefab;
 	public GameObject entrancePrefab;
 	public GameObject entrance;
 
@@ -21,7 +22,11 @@ public class GridManager : MonoBehaviour
 			DestroyObject(this);
 		
 		DontDestroyOnLoad(transform.gameObject);
+	}
 
+	public void NewGrid()
+	{
+		grid.Clear();
 		GenerateGrid();
 		AddEntrance();
 	}
@@ -37,8 +42,13 @@ public class GridManager : MonoBehaviour
 			}
 		}
 	}
+
+	void AddRocks()
+	{
+
+	}
 	
-	public void AddEntrance()
+	void AddEntrance()
 	{
 		float x = Mathf.Round(Random.Range(0, gridSize.x));
 		float y = Mathf.Round(Random.Range(0, gridSize.y));
